@@ -1,3 +1,5 @@
+# Exclude YouTube API Key
+apikey.txt
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
