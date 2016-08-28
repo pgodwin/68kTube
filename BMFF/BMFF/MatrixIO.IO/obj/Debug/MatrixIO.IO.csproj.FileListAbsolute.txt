@@ -1,0 +1,5 @@
+C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO\bin\Debug\MatrixIO.IO.dll
+C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO\bin\Debug\MatrixIO.IO.pdb
+C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.csprojResolveAssemblyReference.cache
+C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.dll
+C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.pdb

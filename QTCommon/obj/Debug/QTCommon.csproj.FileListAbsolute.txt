@@ -1,0 +1,35 @@
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\bin\Debug\PlaceHolder.mp4
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\bin\Debug\QTCommon.dll
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\bin\Debug\QTCommon.pdb
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\bin\Debug\Interop.QTOControlLib.dll
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\bin\Debug\AxInterop.QTOControlLib.dll
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\obj\Debug\Interop.QTOControlLib.dll
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\obj\Debug\Interop.QTOLibrary.dll
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\obj\Debug\AxInterop.QTOControlLib.dll
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\obj\Debug\QTCommon.csproj.ResolveComReference.cache
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\obj\Debug\QTCommon.dll
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTCommon\obj\Debug\QTCommon.pdb
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\bin\Debug\PlaceHolder.mp4
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\bin\Debug\QTCommon.dll
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\bin\Debug\QTCommon.pdb
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\bin\Debug\Interop.QTOControlLib.dll
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\bin\Debug\AxInterop.QTOControlLib.dll
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\obj\Debug\QTCommon.csprojResolveAssemblyReference.cache
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\obj\Debug\Interop.QTOControlLib.dll
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\obj\Debug\Interop.QTOLibrary.dll
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\obj\Debug\AxInterop.QTOControlLib.dll
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\obj\Debug\QTCommon.csproj.ResolveComReference.cache
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\obj\Debug\QTCommon.dll
+C:\Users\pete\Desktop\Mac\QTTest\QTCommon\obj\Debug\QTCommon.pdb
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\bin\Debug\PlaceHolder.mp4
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\bin\Debug\QTCommon.dll
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\bin\Debug\QTCommon.pdb
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\bin\Debug\Interop.QTOControlLib.dll
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\bin\Debug\AxInterop.QTOControlLib.dll
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.csprojResolveAssemblyReference.cache
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\Interop.QTOControlLib.dll
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\Interop.QTOLibrary.dll
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\AxInterop.QTOControlLib.dll
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.csproj.ResolveComReference.cache
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.dll
+C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.pdb

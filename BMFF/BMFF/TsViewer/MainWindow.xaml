@@ -1,0 +1,101 @@
+﻿<Window x:Class="TsViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:local="clr-namespace:TsViewer" 
+        xmlns:ts="clr-namespace:MatrixIO.IO.MpegTs;assembly=MatrixIO.IO.MPEGTS"
+        xmlns:Properties="clr-namespace:TsViewer.Properties"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="TsViewer"
+        Height="{Binding MainWindow_Height, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}" 
+        Width="{Binding MainWindow_Width, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}">
+    <Window.Resources>
+        <Style TargetType="TreeViewItem">
+            <Setter Property="IsExpanded" Value="true" />
+        </Style>
+        <HierarchicalDataTemplate x:Key="SourceNode" DataType="{x:Type local:TsSource}" ItemsSource="{Binding Path=Demuxer.Programs}">
+            <StackPanel Orientation="Horizontal">
+                <!--<Image Width="16" Height="16" Source="{Binding Converter={local:BoxToIconConverter}}"/>-->
+                <TextBlock Text="{Binding}"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <HierarchicalDataTemplate x:Key="ProgramNode" DataType="{x:Type ts:TsProgram}" ItemsSource="{Binding Path=Streams}">
+            <StackPanel Orientation="Horizontal">
+                <!--<Image Width="16" Height="16" Source="{Binding Converter={local:BoxToIconConverter}}"/>-->
+                <TextBlock Text="{Binding}"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <DataTemplate x:Key="StreamNode" DataType="{x:Type ts:TsStream}">
+            <StackPanel Orientation="Horizontal">
+                <!--<Image Width="16" Height="16" Source="{Binding Converter={local:BoxToIconConverter}}"/>-->
+                <TextBlock Text="{Binding Path=Type}"/>
+                <TextBlock Text=" (PID "/>
+                <TextBlock Text="{Binding Path=PacketIdentifier}"/>
+                <TextBlock Text=")"/>
+            </StackPanel>
+        </DataTemplate>
+        <HierarchicalDataTemplate x:Key="Node" ItemsSource="{Binding}">
+            <StackPanel Orientation="Horizontal">
+                <!--<Image Width="16" Height="16" Source="{Binding Converter={local:BoxToIconConverter}}"/>-->
+                <TextBlock Text="{Binding}"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <DataTemplate x:Key="Leaf">
+            <StackPanel Orientation="Horizontal">
+                <!--<Image Width="16" Height="16" Source="{Binding Converter={local:BoxToIconConverter}}"/>-->
+                <TextBlock Text="{Binding}"/>
+            </StackPanel>
+        </DataTemplate>
+        <local:TreeBoxDataTemplateSelector x:Key="TreeBoxSelector" Leaf="{StaticResource Leaf}" Node="{StaticResource Node}" SourceNode="{StaticResource SourceNode}" ProgramNode="{StaticResource ProgramNode}" StreamNode="{StaticResource StreamNode}"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding MainWindow_TreeWidth, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open File"/>
+                <MenuItem Header="Open _Stream"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Log" Click="MenuItem_Log_Click"/>
+            </MenuItem>
+            <MenuItem Name="debugMenu" Header="_Debug" Visibility="Collapsed">
+                <MenuItem Header="_Break" Click="MenuItem_Break_Click"/>
+            </MenuItem>
+        </Menu>
+        <TreeView Grid.Row="1" Name="TreeView1" ItemsSource="{Binding Sources}" ItemTemplateSelector="{StaticResource TreeBoxSelector}" Margin="0,0,4,0"/>
+        <GridSplitter Grid.Row="1" Width="4"/>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="{Binding MainWindow_ContentHeight, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}"/>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="0"/>
+            <GridSplitter Grid.Row="1" Width="Auto" Height="4" ResizeDirection="Rows" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0"/>
+            <ListView Grid.Row="1" Margin="0,4,0,0"/>
+        </Grid>
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="2">
+            <StatusBarItem>
+                <TextBlock Name="statusBarBitrate" Text="Bitrate: 0.0bps"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="statusBarPacketrate" Text="Packetrate: 0.0pps"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="statusBarPacketsize" Text="Avg. Packet: 0.0B"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="statusBarDroppedPackets" Text="Dropped Packets: 0.0"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="statusBarProcessingTime" Text="Time/Packet: 0"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

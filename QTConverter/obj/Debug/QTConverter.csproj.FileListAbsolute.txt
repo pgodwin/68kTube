@@ -1,0 +1,21 @@
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\bin\PlaceHolder.mp4
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\bin\QTConverter.exe.config
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\bin\QTConverter.exe
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\bin\QTConverter.pdb
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTConverter\obj\Debug\QTConverter.csprojResolveAssemblyReference.cache
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTConverter\obj\Debug\QTConverter.exe
+d:\Users\pgodwin\documents\visual studio 2013\Projects\QTTest\QTConverter\obj\Debug\QTConverter.pdb
+C:\Users\pete\Desktop\Mac\QTTest\bin\PlaceHolder.mp4
+C:\Users\pete\Desktop\Mac\QTTest\bin\QTConverter.exe.config
+C:\Users\pete\Desktop\Mac\QTTest\bin\QTConverter.exe
+C:\Users\pete\Desktop\Mac\QTTest\bin\QTConverter.pdb
+C:\Users\pete\Desktop\Mac\QTTest\QTConverter\obj\Debug\QTConverter.csprojResolveAssemblyReference.cache
+C:\Users\pete\Desktop\Mac\QTTest\QTConverter\obj\Debug\QTConverter.exe
+C:\Users\pete\Desktop\Mac\QTTest\QTConverter\obj\Debug\QTConverter.pdb
+C:\Users\pete\Documents\GitHub\68kTube\bin\PlaceHolder.mp4
+C:\Users\pete\Documents\GitHub\68kTube\bin\QTConverter.exe.config
+C:\Users\pete\Documents\GitHub\68kTube\bin\QTConverter.exe
+C:\Users\pete\Documents\GitHub\68kTube\bin\QTConverter.pdb
+C:\Users\pete\Documents\GitHub\68kTube\QTConverter\obj\Debug\QTConverter.csprojResolveAssemblyReference.cache
+C:\Users\pete\Documents\GitHub\68kTube\QTConverter\obj\Debug\QTConverter.exe
+C:\Users\pete\Documents\GitHub\68kTube\QTConverter\obj\Debug\QTConverter.pdb

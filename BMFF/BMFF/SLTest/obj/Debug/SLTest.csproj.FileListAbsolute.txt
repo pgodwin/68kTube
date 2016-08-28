@@ -1,0 +1,4 @@
+C:\Users\pete\Downloads\basemedia-72293\BMFF\SLTest\obj\Debug\SLTest.csprojResolveAssemblyReference.cache
+C:\Users\pete\Downloads\basemedia-72293\BMFF\SLTest\obj\Debug\App.g.cs
+C:\Users\pete\Downloads\basemedia-72293\BMFF\SLTest\obj\Debug\MainPage.g.cs
+C:\Users\pete\Downloads\basemedia-72293\BMFF\SLTest\obj\Debug\SLTest.g.resources

@@ -1,0 +1,117 @@
+﻿<Window x:Class="BmffViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:bmff="clr-namespace:MatrixIO.IO.Bmff;assembly=MatrixIO.IO.Bmff"
+        xmlns:local="clr-namespace:BmffViewer"
+        xmlns:Properties="clr-namespace:BmffViewer.Properties"
+        xmlns:d="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+        Title="BmffViewer"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Height="{Binding MainWindow_Height, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}" 
+        Width="{Binding MainWindow_Width, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}">
+    <Window.Resources>
+        <HierarchicalDataTemplate x:Key="Node" ItemsSource="{Binding Children}">
+            <StackPanel Orientation="Horizontal">
+                <Image Width="16" Height="16" Source="{Binding Converter={local:BoxToIconConverter}}"/>
+                <TextBlock Text="{Binding}"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <DataTemplate x:Key="Leaf">
+            <StackPanel Orientation="Horizontal">
+                <Image Width="16" Height="16" Source="{Binding Converter={local:BoxToIconConverter}}"/>
+                <TextBlock Text="{Binding}"/>
+            </StackPanel>
+        </DataTemplate>
+        <local:TreeBoxDataTemplateSelector x:Key="TreeBoxSelector" Leaf="{StaticResource Leaf}" Node="{StaticResource Node}"/>
+
+        <DataTemplate x:Key="BinaryView">
+            <ListView FontFamily="Consolas" ItemsSource="{Binding Converter={local:BoxToHexConverter}}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="TableView">
+            <!-- DataGrid has several nasty bugs.  Whatever you do, don't just enable editing!  It'll crash the app in various situations. -->
+            <DataGrid ItemsSource="{Binding Path=Entries}" CanUserAddRows="False" CanUserDeleteRows="False" LoadingRow="DataGrid_LoadingRow" AutoGenerateColumns="True" IsReadOnly="True" />
+        </DataTemplate>
+        <local:ContentViewTemplateSelector x:Key="ContentViewSelector" Binary="{StaticResource BinaryView}" Table="{StaticResource TableView}"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="Open_Executed"/>
+        <CommandBinding Command="SaveAs" Executed="SaveAs_Executed" CanExecute="SaveAs_CanExecute"/>
+        <CommandBinding Command="Close" Executed="Close_Executed" CanExecute="Close_CanExecute"/>
+        <CommandBinding Command="Zoom" Executed="FastStart_Executed" CanExecute="FastStart_CanExecute"/>
+        <CommandBinding Command="IncreaseZoom" Executed="DecompressMovieHeader_Executed" CanExecute="DecompressMovieHeader_CanExecute"/>
+        <CommandBinding Command="Favorites" Executed="SupportedBoxes_Executed"/>
+        <CommandBinding Command="NavigateJournal" Executed="Log_Executed"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding MainWindow_TreeWidth, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" Command="Open"/>
+                <MenuItem Header="Save As..." Command="SaveAs" />
+                <MenuItem Header="_Close" Command="Close"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Supported Boxes" Command="Favorites"/>
+                <MenuItem Header="_Log" Command="NavigateJournal"/>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_FastStart" Command="Zoom"/>
+                <MenuItem Header="_Decompress Movie Header" Command="IncreaseZoom"/>
+            </MenuItem>
+        </Menu>
+        <TreeView Grid.Row="1" Name="TreeView1" ItemsSource="{Binding Files}" ItemTemplateSelector="{StaticResource TreeBoxSelector}" TreeViewItem.Selected="TreeView1_TreeViewItem_Selected" Margin="0,0,4,0" />
+        <GridSplitter Grid.Row="1" Width="4"/>
+        <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ElementName=TreeView1, Path=SelectedItem}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="{Binding MainWindow_PropertiesHeight, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}"/>
+                <RowDefinition Height="{Binding MainWindow_ContentHeight, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Black" BorderThickness=".25,.25,0,0">
+                <Border BorderBrush="White" BorderThickness="0,0,.25,.25">
+                    <TextBlock Text="{Binding Converter={local:BoxToDescriptionConverter}}" Background="{x:Static SystemColors.ControlBrush}" Foreground="{x:Static SystemColors.ControlTextBrush}" TextAlignment="Center"/>
+                </Border>
+            </Border>
+            <ListView Grid.Row="1" ItemsSource="{Binding Converter={local:ObjectPropertiesToCollectionViewConverter}}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="{Binding MainWindow_PropertyNameWidth, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}" Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                        <GridViewColumn Width="{Binding MainWindow_PropertyValueWidth, Source={x:Static Properties:Settings.Default}, Mode=TwoWay}" Header="Value" DisplayMemberBinding="{Binding Path=Value}"/>
+                    </GridView>
+                </ListView.View>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Margin" Value="0,0,0,5"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type GroupItem}">
+                                            <Expander IsExpanded="True">
+                                                <Expander.Header>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,0,0"/>
+                                                </Expander.Header>
+                                                <Expander.Content>
+                                                    <ItemsPresenter />
+                                                </Expander.Content>
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
+            <GridSplitter Grid.Row="2" Width="Auto" Height="4" ResizeDirection="Rows" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0"/>
+            <ContentControl Grid.Row="2" Margin="0,4,0,0" ContentTemplateSelector="{StaticResource ContentViewSelector}" Content="{Binding}"/>
+        </Grid>
+    </Grid>
+</Window>
