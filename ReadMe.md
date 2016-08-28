@@ -2,6 +2,8 @@
 
 68kTube is a client/server application which allows Macitosh Computers with QuickTime 4.1 or later to stream video from YouTube.
 
+![Obligitory Screenshot](http://i.imgur.com/DkoQ7ly.png)
+
 What Works:
  - Searching
  - Transcoding
