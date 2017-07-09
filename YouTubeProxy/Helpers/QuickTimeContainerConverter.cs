@@ -9,6 +9,10 @@ namespace YouTubeProxy.Helpers
 {
     public class QuickTimeContainerConverter
     {
+        /// <summary>
+        /// This was a test method to try and improve the compatibility of streaming in QT3 on the mac...
+        /// </summary>
+        /// <param name="sourceFile"></param>
         public static void MakeQuickTime3Compatible(string sourceFile)
         {
             var fileInfo = new FileInfo(sourceFile);
