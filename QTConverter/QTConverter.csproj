@@ -51,6 +51,7 @@
     <ProjectReference Include="..\QTCommon\QTCommon.csproj">
       <Project>{0b1ee7ac-2d3c-400f-8bbd-0bf379b40d1c}</Project>
       <Name>QTCommon</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

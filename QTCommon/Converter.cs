@@ -64,7 +64,7 @@ namespace QTCommon
             if (e.eventID == (int)QTOLibrary.QTEventIDsEnum.qtEventExportProgress)
             {
                 // log progress
-                var progress = e.eventObject.GetParam(QTOLibrary.QTEventObjectParametersEnum.qtEventParamAmount);
+                var progress = (float)e.eventObject.GetParam(QTOLibrary.QTEventObjectParametersEnum.qtEventParamAmount);
 
                 // At the end the paramAmount = 0 (for some reason), if so make it 100!
                 if (progress == 1)
@@ -78,8 +78,9 @@ namespace QTCommon
         public static void EditSettings(string settingsXmlPath)
         {
             string settingsString = null;
-            if (File.Exists(settingsXmlPath))
+            if (File.Exists(Path.GetFullPath(settingsXmlPath)))
             {
+                settingsXmlPath = Path.GetFullPath(settingsXmlPath);
                 settingsString = File.ReadAllText(settingsXmlPath);
             }
 
