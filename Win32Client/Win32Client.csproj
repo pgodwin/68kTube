@@ -60,6 +60,7 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Models\ConversionStatusModel.cs" />
     <Compile Include="Models\SearchResultModel.cs" />
+    <Compile Include="Models\StreamStatus.cs" />
     <Compile Include="Search.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbHttp = new System.Windows.Forms.RadioButton();
+            this.rbRTSP = new System.Windows.Forms.RadioButton();
             this.txtBaseUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.rbRTSP = new System.Windows.Forms.RadioButton();
-            this.rbHttp = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.encodeOptionsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
@@ -53,6 +53,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Streaming Method";
             // 
+            // rbHttp
+            // 
+            this.rbHttp.AutoSize = true;
+            this.rbHttp.Checked = true;
+            this.rbHttp.Location = new System.Drawing.Point(18, 55);
+            this.rbHttp.Name = "rbHttp";
+            this.rbHttp.Size = new System.Drawing.Size(163, 17);
+            this.rbHttp.TabIndex = 1;
+            this.rbHttp.TabStop = true;
+            this.rbHttp.Text = "HTTP Progressive Download";
+            this.rbHttp.UseVisualStyleBackColor = true;
+            // 
+            // rbRTSP
+            // 
+            this.rbRTSP.AutoSize = true;
+            this.rbRTSP.Location = new System.Drawing.Point(18, 31);
+            this.rbRTSP.Name = "rbRTSP";
+            this.rbRTSP.Size = new System.Drawing.Size(54, 17);
+            this.rbRTSP.TabIndex = 0;
+            this.rbRTSP.Text = "RTSP";
+            this.rbRTSP.UseVisualStyleBackColor = true;
+            // 
             // txtBaseUrl
             // 
             this.txtBaseUrl.Location = new System.Drawing.Point(103, 13);
@@ -68,29 +90,6 @@
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Base Address:";
-            // 
-            // rbRTSP
-            // 
-            this.rbRTSP.AutoSize = true;
-            this.rbRTSP.Enabled = false;
-            this.rbRTSP.Location = new System.Drawing.Point(18, 31);
-            this.rbRTSP.Name = "rbRTSP";
-            this.rbRTSP.Size = new System.Drawing.Size(54, 17);
-            this.rbRTSP.TabIndex = 0;
-            this.rbRTSP.Text = "RTSP";
-            this.rbRTSP.UseVisualStyleBackColor = true;
-            // 
-            // rbHttp
-            // 
-            this.rbHttp.AutoSize = true;
-            this.rbHttp.Checked = true;
-            this.rbHttp.Location = new System.Drawing.Point(18, 55);
-            this.rbHttp.Name = "rbHttp";
-            this.rbHttp.Size = new System.Drawing.Size(163, 17);
-            this.rbHttp.TabIndex = 1;
-            this.rbHttp.TabStop = true;
-            this.rbHttp.Text = "HTTP Progressive Download";
-            this.rbHttp.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -158,6 +157,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Settings";
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.Settings_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

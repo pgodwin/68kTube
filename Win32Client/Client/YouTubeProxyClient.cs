@@ -39,5 +39,14 @@ namespace Win32Client.Client
 
             return results.ToList();
         }
+
+        public List<StreamStatus> GetRtspStream(string videoId)
+        {
+            var csvResult = client.DownloadData(string.Format("api/Stream/{0}/", videoId)).MacRomanToString();
+
+            var results = MacDeserialiser.Deserialize<StreamStatus>(csvResult);
+
+            return results.ToList();
+        }
     }
 }

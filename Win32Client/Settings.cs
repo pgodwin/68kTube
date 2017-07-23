@@ -60,7 +60,8 @@ namespace Win32Client
             return new ClientSettings
             {
                 BaseUrl = txtBaseUrl.Text,
-                Profile = profile
+                Profile = profile,
+                StreamMode = rbRTSP.Checked ? "RTSP" : "HTTP"
             };
         }
 
@@ -68,6 +69,10 @@ namespace Win32Client
         {
             txtBaseUrl.Text = settings.BaseUrl;
             encodeOptionsPanel.Controls.Cast<RadioButton>().FirstOrDefault(c => c.Text == settings.Profile).Checked = true;
+            if (settings.StreamMode == "RTSP")
+                rbRTSP.Checked = true;
+            else
+                rbHttp.Checked = true;
 
         }
 
@@ -79,6 +84,11 @@ namespace Win32Client
         private void button2_Click(object sender, EventArgs e)
         {
             this.GetSettings().SaveSettings();
+        }
+
+        private void Settings_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

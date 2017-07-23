@@ -37,7 +37,8 @@ namespace Win32Client
                 return new ClientSettings
                 {
                     BaseUrl = "http://localhost:9000/",
-                    Profile = "h263"
+                    Profile = "h263",
+                    StreamMode = "HTTP"
                 };
             }
         }
@@ -48,6 +49,8 @@ namespace Win32Client
         }
 
         public string Profile { get; set; }
+
+        public string StreamMode { get; set; }
 
         public void SaveSettings()
         {

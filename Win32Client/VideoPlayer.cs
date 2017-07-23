@@ -47,10 +47,28 @@ namespace Win32Client
 
         private void StartEncode()
         {
-            encodeCheckTimer = new Timer();
-            encodeCheckTimer.Interval = 1000;
-            encodeCheckTimer.Tick += Timer_Tick;
-            encodeCheckTimer.Start();
+            if (Settings.StreamMode == "HTTP")
+            {
+                encodeCheckTimer = new Timer();
+                encodeCheckTimer.Interval = 1000;
+                encodeCheckTimer.Tick += Timer_Tick;
+                encodeCheckTimer.Start();
+            }
+            else
+            {
+                var result = Client.GetRtspStream(item.VideoId).FirstOrDefault();
+                if (result != null && result.Success)
+                {
+                    axQTControl1.URL = result.RtspUrl;
+                    axQTControl1.Show();
+                    
+                    axQTControl1.Movie.Play();
+                }
+                else
+                {
+                    MessageBox.Show("Error establishing RTSP stream");
+                }
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)

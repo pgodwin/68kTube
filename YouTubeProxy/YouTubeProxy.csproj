@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\StreamController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="GlobalStatus.cs" />
