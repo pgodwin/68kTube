@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -40,6 +41,13 @@ namespace QTConverter
             string profile = args[0];
             string url = args[1];
             string output = args[2];
+
+            if (!File.Exists(profile))
+            {
+                Console.Write("Invalid Profile specified");
+                Environment.Exit(100);
+                return;
+            }
 
             Console.WriteLine("Converting {0} with profile {1}", url, profile);
             Convert(profile, url, output);
