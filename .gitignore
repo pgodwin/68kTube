@@ -347,3 +347,4 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 /YouTubeProxy/ExternalBin/ffmpeg.exe
+YouTubeProxy/obj/Debug/YouTubeProxy.csproj.FileListAbsolute.txt

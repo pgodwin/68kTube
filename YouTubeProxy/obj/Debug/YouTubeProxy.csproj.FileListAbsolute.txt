@@ -61,3 +61,15 @@ C:\Users\pete\Documents\GitHub\68kTube\bin\YouTubeProxy.pdb
 C:\Users\pete\Documents\GitHub\68kTube\YouTubeProxy\obj\Debug\YouTubeProxy.csprojResolveAssemblyReference.cache
 C:\Users\pete\Documents\GitHub\68kTube\YouTubeProxy\obj\Debug\YouTubeProxy.exe
 C:\Users\pete\Documents\GitHub\68kTube\YouTubeProxy\obj\Debug\YouTubeProxy.pdb
+C:\Users\pete\Repo\68kTube\bin\ExternalBin\ffmpeg.exe
+C:\Users\pete\Repo\68kTube\YouTubeProxy\obj\Debug\YouTubeProxy.csprojResolveAssemblyReference.cache
+C:\Users\pete\Repo\68kTube\YouTubeProxy\obj\Debug\YouTubeProxy.exe
+C:\Users\pete\Repo\68kTube\YouTubeProxy\obj\Debug\YouTubeProxy.pdb
+C:\Users\pete\Repo\68kTube\bin\apikey.txt
+C:\Users\pete\Repo\68kTube\bin\Profiles\cinepak.xml
+C:\Users\pete\Repo\68kTube\bin\Profiles\quadra.xml
+C:\Users\pete\Repo\68kTube\bin\Profiles\video1.xml
+C:\Users\pete\Repo\68kTube\bin\YouTubeProxy.exe.config
+C:\Users\pete\Repo\68kTube\bin\YouTubeProxy.exe
+C:\Users\pete\Repo\68kTube\bin\YouTubeProxy.pdb
+C:\Users\pete\Repo\68kTube\bin\video\VideosGoHere.txt

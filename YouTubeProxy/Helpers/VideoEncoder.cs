@@ -16,7 +16,7 @@ namespace YouTubeProxy.Helpers
     {
 
         /// <summary>
-        /// Hacky as shit, move this to an external file.
+        /// DEFINE YOUR ENCODING PROFILES HERE!
         /// </summary>
         public static Dictionary<string, EncodingProfile> profiles = new Dictionary<string, EncodingProfile>()
         {
@@ -24,7 +24,7 @@ namespace YouTubeProxy.Helpers
                 {
                     Name = "video1",
                     Exe = "QTConverter.exe",
-                    Arguments = "video1.xml {0} {1}.mov"
+                    Arguments = @"profiles\video1.xml {0} {1}.mov"
                 }
             },
             {
@@ -32,7 +32,7 @@ namespace YouTubeProxy.Helpers
                 {
                     Name = "cinepak",
                     Exe = "QTConverter.exe",
-                    Arguments = "cinepak.xml {0} {1}.mov"
+                    Arguments = @"profiles\cinepak.xml {0} {1}.mov"
                 }
             },
             { "h263", new EncodingProfile()
@@ -89,6 +89,9 @@ namespace YouTubeProxy.Helpers
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = profile.Exe;
             string arguments = string.Format(profile.Arguments, uri, @".\video\" + videoId);
+
+            Console.WriteLine("Running: {0} {1}", startInfo.FileName, arguments);
+
             startInfo.Arguments = arguments;
             startInfo.CreateNoWindow = true;
             startInfo.RedirectStandardOutput = true;

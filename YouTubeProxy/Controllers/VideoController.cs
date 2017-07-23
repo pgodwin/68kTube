@@ -51,7 +51,7 @@ namespace YouTubeProxy.Controllers
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
-                VideoEncoder.StartEncoding(profile, id, video.Uri);
+                VideoEncoder.StartEncoding(profile, id, video.GetUri());
             }).Start();
 
             return new MacDeliminatedResult<ConversionStatusModel>(status);
