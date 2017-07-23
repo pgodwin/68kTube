@@ -348,3 +348,6 @@ __pycache__/
 *.xsd.cs
 /YouTubeProxy/ExternalBin/ffmpeg.exe
 YouTubeProxy/obj/Debug/YouTubeProxy.csproj.FileListAbsolute.txt
+QTConverter/obj/Debug/QTConverter.csproj.FileListAbsolute.txt
+BMFF/BMFF/MatrixIO.IO/obj/Debug/MatrixIO.IO.csproj.FileListAbsolute.txt
+QTCommon/obj/Debug/QTCommon.csproj.FileListAbsolute.txt
