@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,8 +17,13 @@ namespace YouTubeProxy.Controllers
 {
     public class StreamController : ApiController
     {
-        
-        public string testARgs = "-re -y -i \"{0}\" -vf \"scale=(iw* sar)*min(352/(iw* sar)\\,288/ih):ih* min(352/(iw* sar)\\,288/ih), pad=352:288:(352-iw* min(352/iw\\,288/ih))/2:(288-ih* min(352/iw\\,288/ih))/2\" -vcodec h263 -b:v 300k -r 15 -acodec pcm_alaw -ar 8000 -ac 1 -muxdelay 0.1 -f rtsp rtsp://stream:stream@127.0.0.1:554/{1}.sdp";
+        public static string rtspServer = Settings.RtspServer;
+
+        /// <summary>
+        /// This is just the test arguments, need profiles etc 
+        /// The long term approach is to have an "encode" manager that handles all of this
+        /// </summary>
+        public string testARgs = "-re -y -i \"{0}\" -vf \"scale=(iw* sar)*min(352/(iw* sar)\\,288/ih):ih* min(352/(iw* sar)\\,288/ih), pad=352:288:(352-iw* min(352/iw\\,288/ih))/2:(288-ih* min(352/iw\\,288/ih))/2\" -vcodec h263 -b:v 300k -r 15 -acodec pcm_alaw -ar 8000 -ac 1 -muxdelay 0.1 -f rtsp rtsp://stream:stream@" + rtspServer + "/{1}.sdp";
 
 
         /// <summary>
@@ -34,6 +44,7 @@ namespace YouTubeProxy.Controllers
                 string arguments = string.Format(testARgs, sourceUri, id);
                 startInfo.FileName = "ffmpeg.exe";
                 startInfo.Arguments = arguments;
+                startInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
                 Console.WriteLine("Running: {0} {1}", startInfo.FileName, arguments);
                 using (Process process = new Process() { StartInfo = startInfo })
@@ -48,7 +59,7 @@ namespace YouTubeProxy.Controllers
                 {
                     VideoId = id,
                     Success = true,
-                    RtspUrl = "rtsp://127.0.0.1:554/" + id + ".sdp"
+                    RtspUrl = "rtsp://" + ConfigurationManager.AppSettings["rtspServer"] + "/" + id + ".sdp"
                 });
                 
             }
@@ -61,7 +72,8 @@ namespace YouTubeProxy.Controllers
 
         }
 
-        
+
+
     }
 
     public class StreamStatus

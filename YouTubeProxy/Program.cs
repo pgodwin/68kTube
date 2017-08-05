@@ -13,18 +13,25 @@ namespace YouTubeProxy
     {
         static void Main(string[] args)
         {
+            // Used later to ensure the atoms are in the correct order for QT3
             Helpers.BmffPortabilityFactory _pf = new Helpers.BmffPortabilityFactory();
+                        
 
-            string baseAddress = ConfigurationManager.AppSettings["baseAddress"];
-            string port = ConfigurationManager.AppSettings["port"];
-
-            var address = baseAddress + ":" + port;
+            var address = Settings.ListeningUrl;
 
             // Start OWIN host 
-            using (var owin = WebApp.Start<Startup>(url: address))
+            try
             {
-                
-                Console.WriteLine("Press ENTER to exit.");
+                using (var owin = WebApp.Start<Startup>(url: address))
+                {
+                    Console.WriteLine("Listening on {0}", address);
+                    Console.WriteLine("Press ENTER to exit.");
+                    Console.ReadLine();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to create WebServer on {0}. Are you running as an Administrator?", address);
                 Console.ReadLine();
             }
                       

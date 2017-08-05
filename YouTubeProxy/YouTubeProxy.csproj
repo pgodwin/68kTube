@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\MovController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StreamController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -152,6 +153,9 @@
     </Content>
     <Content Include="ExternalBin\ffmpeg.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RefTest.mov">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Profiles\cinepak.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

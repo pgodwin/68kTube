@@ -73,3 +73,4 @@ C:\Users\pete\Repo\68kTube\bin\YouTubeProxy.exe.config
 C:\Users\pete\Repo\68kTube\bin\YouTubeProxy.exe
 C:\Users\pete\Repo\68kTube\bin\YouTubeProxy.pdb
 C:\Users\pete\Repo\68kTube\bin\video\VideosGoHere.txt
+C:\Users\pete\Repo\68kTube\bin\RefTest.mov

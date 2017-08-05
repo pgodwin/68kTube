@@ -55,6 +55,7 @@ namespace YouTubeProxy.Controllers
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
             
             var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+
             
             result.Content = new StreamContent(stream);
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("video/quicktime");
