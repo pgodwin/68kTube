@@ -1,0 +1,32 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<YouTubeProxy.Models.WatchVideoModel>
+
+@{
+    Layout = "Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "68kTube - " + @Model.Title;
+    ViewBag.Refresh = Model.EncodeDetails.Progress.Status != YouTubeProxy.EncodingEngine.StatusCodes.ReadyForDownload;
+}
+
+<h2>@Model.Title</h2>
+@if (Model.EncodeDetails.Progress.Status == YouTubeProxy.EncodingEngine.StatusCodes.ReadyForDownload)
+{
+    <embed src="@Model.PlayUrl" 
+           HEIGHT="304" WIDTH="352"
+           TYPE="video/quicktime"
+           PLUGINSPAGE="http://www.apple.com/quicktime/download/">
+    </embed>
+    <br />
+    <a href="@Model.DownloadUrl">Download Video</a>
+}
+else // Video is still encoding
+{
+    @Model.EncodeDetails.Progress.Status.ToString()
+    <table width="300" border="1">
+        <tr>
+            <td width="@Model.EncodeDetails.Progress.Progress;%" bgcolor="#4286f4" align="center">
+                @Model.EncodeDetails.Progress.Progress%
+            </td>
+            <td width="@(100 - Model.EncodeDetails.Progress.Progress)%" bgcolor="#ffffff">&nbsp;</td>
+        </tr>
+    </table>
+}
+<p>@Model.Description</p>

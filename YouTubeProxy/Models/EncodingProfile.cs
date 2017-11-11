@@ -9,7 +9,12 @@ namespace YouTubeProxy.Models
     public class EncodingProfile
     {
         public string Name { get; set; }
+
+        public string FriendlyName { get; set; }
+        public string Description { get; set; }
+        
         public string Exe { get; set; }
         public string Arguments { get; set; }
+        public string OutputExtension { get; set; }
     }
 }

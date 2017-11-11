@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using YouTubeProxy.Helpers;
 
-namespace YouTubeProxy.Controllers
+namespace YouTubeProxy.Controllers.MacApi
 {
     public class DownloadController : ApiController
     {
@@ -37,6 +37,7 @@ namespace YouTubeProxy.Controllers
         [ActionName("mov")]
         public HttpResponseMessage GetMov(string id)
         {
+            Console.WriteLine("Movie requested {0}", id);
             //if (!GlobalStatus.ConversionStatus.ContainsKey(id))
               //  return new HttpResponseMessage(HttpStatusCode.NotFound);
 
@@ -46,8 +47,8 @@ namespace YouTubeProxy.Controllers
              //   return new HttpResponseMessage(HttpStatusCode.NotFound);
 
             //var path = @".\video\" + id;
-
-            var path = Directory.EnumerateFiles(".\\video\\", id + ".*").FirstOrDefault(); ;
+            
+            var path = Directory.EnumerateFiles(Settings.EncodeLocation, id + ".*").FirstOrDefault(); ;
 
             if (path == null)
                 return new HttpResponseMessage(HttpStatusCode.NotFound);
@@ -64,6 +65,7 @@ namespace YouTubeProxy.Controllers
             
         }
 
+        
         
     }
 }

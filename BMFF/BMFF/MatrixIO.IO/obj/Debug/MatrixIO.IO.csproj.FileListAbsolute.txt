@@ -7,3 +7,4 @@ C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\bin\Debug\MatrixIO.IO.dll
 C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\bin\Debug\MatrixIO.IO.pdb
 C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.dll
 C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.pdb
+C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.csprojResolveAssemblyReference.cache

@@ -12,7 +12,7 @@ using System.Web.Http;
 using YouTubeProxy.Helpers;
 using YouTubeProxy.Models;
 
-namespace YouTubeProxy.Controllers
+namespace YouTubeProxy.Controllers.MacApi
 {
     public class SearchController : ApiController
     {

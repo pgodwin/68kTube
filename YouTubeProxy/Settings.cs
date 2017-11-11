@@ -28,5 +28,21 @@ namespace YouTubeProxy
                 return ConfigurationManager.AppSettings["rtspServer"];
             }
         }
+
+        public static string EncodeLocation
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["encodeLocation"];
+            }
+        }
+
+        public static string DefaultProfile
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["defaultProfile"];
+            }
+        }
     }
 }

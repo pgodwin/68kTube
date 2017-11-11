@@ -23,5 +23,6 @@ namespace YouTubeProxy.Models
 
         [ColumnOrderAttribute(5)]
         public string ThumbUrl { get; set; }
+
     }
 }

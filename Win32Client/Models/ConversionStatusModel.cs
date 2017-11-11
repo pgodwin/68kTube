@@ -31,7 +31,8 @@ namespace Win32Client.Models
         {
             Error,
             Encoding,
-            ReadyForDownload
+            ReadyForDownload,
+            Queued
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using VideoLibrary;
 
-namespace YouTubeProxy.Controllers
+namespace YouTubeProxy.Controllers.MacApi
 {
     public class StreamController : ApiController
     {
@@ -34,7 +34,7 @@ namespace YouTubeProxy.Controllers
         public MacDeliminatedResult<StreamStatus> Get(string id)
         {
             
-            var youTube = YouTube.Default;
+            var youTube = VideoLibrary.YouTube.Default;
             var video = youTube.GetAllVideos("http://www.youtube.com/watch?v=" + id).FirstOrDefault(v => v.Format == VideoFormat.Mp4 && v.Resolution <= 360);
 
             if (video != null)

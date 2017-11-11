@@ -29,8 +29,8 @@ namespace YouTubeProxy
           );
 
 
-            
             appBuilder.UseWebApi(config);
+            appBuilder.UseNancy();
         }
     }
 }

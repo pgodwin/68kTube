@@ -11,6 +11,8 @@
     <AssemblyName>YouTubeProxy</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -83,6 +85,18 @@
       <HintPath>..\packages\Microsoft.Owin.Hosting.2.0.2\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Nancy, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.1.4.3\lib\net40\Nancy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nancy.Owin, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.Owin.1.4.1\lib\net40\Nancy.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nancy.ViewEngines.Razor, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.Viewengines.Razor.1.4.3\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -107,6 +121,10 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -118,13 +136,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\DownloadController.cs" />
-    <Compile Include="Controllers\MovController.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\StreamController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\VideoController.cs" />
-    <Compile Include="GlobalStatus.cs" />
+    <Compile Include="Controllers\MacApi\DownloadController.cs" />
+    <Compile Include="Controllers\MacApi\MovController.cs" />
+    <Compile Include="Controllers\MacApi\SearchController.cs" />
+    <Compile Include="Controllers\MacApi\StreamController.cs" />
+    <Compile Include="Controllers\MacApi\VideoController.cs" />
+    <Compile Include="EncodingEngine\EncodeDetail.cs" />
+    <Compile Include="EncodingEngine\Encoder.cs" />
+    <Compile Include="EncodingEngine\EncodeStore.cs" />
+    <Compile Include="EncodingEngine\Profiles.cs" />
+    <Compile Include="EncodingEngine\EncodingQueue.cs" />
     <Compile Include="Helpers\BaseMediaFile.cs" />
     <Compile Include="Helpers\BmffPortabilityFactory.cs" />
     <Compile Include="Helpers\MacDeliminatedResult.cs" />
@@ -132,20 +153,52 @@
     <Compile Include="Helpers\QtEmbedResult.cs" />
     <Compile Include="Helpers\QtlResult.cs" />
     <Compile Include="Helpers\QuickTimeContainerConverter.cs" />
-    <Compile Include="Helpers\VideoEncoder.cs" />
     <Compile Include="Helpers\YouTubeApi.cs" />
+    <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\ConversionStatusModel.cs" />
     <Compile Include="Models\EncodingProfile.cs" />
     <Compile Include="Models\SearchResultModel.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
+    <Compile Include="Models\SettingsViewModel.cs" />
+    <Compile Include="Models\WatchVideoModel.cs" />
+    <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Modules\SearchModule.cs" />
+    <Compile Include="Modules\SettingsModule.cs" />
+    <Compile Include="Modules\WatchModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazorConfig.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="YouTube\ApiWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <Content Include="Content\images\68tube.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="profiles.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Search\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Watch\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Settings\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Web.Config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="apikey.txt">
@@ -157,13 +210,13 @@
     <Content Include="RefTest.mov">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Profiles\cinepak.xml">
+    <Content Include="QuickTimeProfiles\cinepak.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Profiles\quadra.xml">
+    <Content Include="QuickTimeProfiles\quadra.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Profiles\video1.xml">
+    <Content Include="QuickTimeProfiles\video1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="video\VideosGoHere.txt">
@@ -180,7 +233,18 @@
       <Name>MatrixIO.IO</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\css\" />
+    <Folder Include="Content\js\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Nancy.Viewengines.Razor.1.4.3\build\Nancy.ViewEngines.Razor.targets" Condition="Exists('..\packages\Nancy.Viewengines.Razor.1.4.3\build\Nancy.ViewEngines.Razor.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Nancy.Viewengines.Razor.1.4.3\build\Nancy.ViewEngines.Razor.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Nancy.Viewengines.Razor.1.4.3\build\Nancy.ViewEngines.Razor.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

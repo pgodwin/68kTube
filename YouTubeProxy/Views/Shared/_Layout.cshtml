@@ -1,0 +1,32 @@
+﻿<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @if (@ViewBag.Refresh)
+    {
+        <meta http-equiv="refresh" content="1">
+    }
+    <basefont face="helvetica, arial">
+</head>
+<body bgcolor="#ffffff">
+<!-- Header -->
+  
+    <!-- Search Form -->
+    <form action="/search" method="get">
+        <h1><img src="/Content/images/68tube.gif" alt="68kTube Icon" align="middle" />68kTube</h1>
+        <input name="q" value="Search YouTube" width="300" />
+        <input type="submit" value="Search" />
+    </form>
+    <hr />
+      @RenderBody()
+    <hr />
+    <!-- Footer -->
+    <footer>
+        <menu>
+            <li><a href="/">Home</a></li>
+            <li><a href="/settings/">Settings</a></li>
+            <li><a href="https://github.com/pgodwin/68kTube">Github</a></li>
+        </menu>
+    </footer>
+</body>
+</html>

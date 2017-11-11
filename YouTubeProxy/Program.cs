@@ -6,6 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Net.Http;
+using System.Xml.Serialization;
+using System.IO;
+using System.Xml;
+using YouTubeProxy.Models;
+using Newtonsoft.Json;
 
 namespace YouTubeProxy
 {
@@ -15,7 +20,7 @@ namespace YouTubeProxy
         {
             // Used later to ensure the atoms are in the correct order for QT3
             Helpers.BmffPortabilityFactory _pf = new Helpers.BmffPortabilityFactory();
-                        
+            
 
             var address = Settings.ListeningUrl;
 

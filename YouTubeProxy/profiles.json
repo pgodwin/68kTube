@@ -1,0 +1,66 @@
+/* 
+   * Some notes on the profiles 
+   * Each name must be unique
+   * Output extension is used to try and assist when returning files
+   * Parameter {0} is input, {1} is output
+  */
+{
+  "video1": {
+    "Name": "video1",
+    "Exe": "QTConverter.exe",
+    "Arguments": "QuickTimeProfiles\\video1.xml {0} {1}.mov",
+    "OutputExtension": "mov",
+
+    "FriendlyName": "Apple Video",
+    "Description": "Recommended only for low-end Macintosh II machines. Poor Quality." 
+  },
+  "cinepak": {
+    "Name": "cinepak",
+    "Exe": "QTConverter.exe",
+    "Arguments": "QuickTimeProfiles\\cinepak.xml {0} {1}.mov",
+    "OutputExtension": "mov",
+    "FriendlyName": "Cinepak",
+    "Description": "Recommended only for low-mid range 68k Macintosh machines. Relatively poor quality."
+  },
+  "h263": {
+    "Name": "h263",
+    "Exe": "ffmpeg.exe",
+    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(352/(iw*sar)\\,288/ih):ih*min(352/(iw*sar)\\,288/ih), pad=352:288:(352-iw*min(352/iw\\,288/ih))/2:(288-ih*min(352/iw\\,288/ih))/2\"  -vcodec h263 -b:v 150k -r 15 -acodec adpcm_ima_qt -ar 22050 -ac 1 -movflags +faststart \"{1}.mov\"",
+    //"Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(352/(iw*sar)\\,288/ih):ih*min(352/(iw*sar)\\,288/ih), pad=352:288:(352-iw*min(352/iw\\,288/ih))/2:(288-ih*min(352/iw\\,288/ih))/2\" -vcodec h263 -b:v 200k -r 15 -acodec adpcm_ima_qt -ar 22255 -ac 1 -movflags +faststart \"{1}.mov\"",
+    "OutputExtension": "mov",
+    "FriendlyName": "H.263",
+    "Description": "Compatible with QuickTime 3 and onwards. Reasonably good quality and can be decompressed on a fast 68kMachine"
+  },
+  "sorrensonFFMPEG": {
+    "Name": "sorrensonFFMPEG",
+    "Exe": "ffmpeg.exe",
+    "Arguments": "-y -i \"{0}\" -vf scale=320:-1 -vcodec svq1 -b:v 500k -acodec adpcm_ima_qt -ar 22050 -ac 2 -movflags +faststart \"{1}.mov\"",
+    "OutputExtension": "mov",
+    "FriendlyName": "Sorreson Video (FFMPEG)",
+    "Description": "Sorrenson is supported on 68k and PPC machines in QuickTime3 or later. Requires a fast CPU to decode."
+  },
+  "sorrenson": {
+    "Name": "sorrenson",
+    "Exe": "qtconverter.exe",
+    "Arguments": "QuickTimeProfiles\\quadra.xml {0} {1}.mov",
+    "OutputExtension": "mov",
+    "FriendlyName": "Sorreson Video (QuickTime)",
+    "Description": "Sorrenson is supported on 68k and PPC machines in QuickTime3 or later. Requires a fast CPU to decode."
+  },
+  "mpeg1": {
+    "Name": "mpeg1",
+    "Exe": "ffmpeg.exe",
+    "Arguments": "-y -i \"{0}\" -vf scale=-1:360 -vcodec mpeg1video -b:v 500k -acodec mp2 -b:a 96k  \"{1}.mpeg\"",
+    "OutputExtension": "mpeg",
+    "FriendlyName": "MPEG1 (PPC Only)",
+    "Description": "MPEG1. Good quality audio and video, but requires a fast PPC procesor." 
+  },
+  "mpeg4": {
+    "Name": "mpeg4",
+    "Exe": "ffmpeg.exe",
+    "Arguments": "-y -i \"{0}\" -vf scale=-1:360 -vcodec mpeg4 -b:v 500k -acodec aac -b:a 96k -movflags +faststart \"{1}.mp4\"",
+    "OutputExtension": "mp4",
+    "FriendlyName": "MPEG4 (PPC Only)",
+    "Description": "MPEG4. Good quality audio and video, but requires a fast PPC (G3+) procesor." 
+  }
+}

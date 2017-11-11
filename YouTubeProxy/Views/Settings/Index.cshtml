@@ -1,0 +1,23 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<YouTubeProxy.Models.SettingsViewModel>
+
+@{
+    Layout = "Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "68kTube - Settings";
+}
+
+<h2>Streaming Settings</h2>
+<p>Set your default encoding settings for use with 68kTube. A variety of options are available depending on the speed of your target machine.</p>
+<p><em>Note: you'll need cookies enabled to persist this setting.</em></p>
+<form method="post" action="/settings">
+    @foreach (var profile in Model.Profiles)
+    {
+        <p>
+            <b><input type="radio" name="profile" value="@profile.Name" @(Model.CurrentProfile==profile.Name ? "checked" : "") />@profile.FriendlyName</b>
+            <br />
+            @profile.Description
+        </p>
+    }
+    <input type="submit" value="Save Settings" />
+</form>
+
+    

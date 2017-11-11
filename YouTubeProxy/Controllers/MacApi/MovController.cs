@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace YouTubeProxy.Controllers
+namespace YouTubeProxy.Controllers.MacApi
 {
     public class RefMovController : ApiController
     {

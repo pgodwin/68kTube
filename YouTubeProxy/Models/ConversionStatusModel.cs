@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YouTubeProxy.EncodingEngine;
 
 namespace YouTubeProxy.Models
 {
@@ -25,12 +26,6 @@ namespace YouTubeProxy.Models
 
         [ColumnOrder(5)]
         public int Progress { get; set; }
-
-        public enum StatusCodes
-        {
-            Error,
-            Encoding,
-            ReadyForDownload
-        }
+        public static object StatusCodes { get; internal set; }
     }
 }
