@@ -15,6 +15,8 @@ namespace YouTubeProxy.Modules
         {
             Get["/settings"] = GetProfiles;
             Post["/settings"] = GetProfiles;
+
+            
         }
 
 
@@ -22,6 +24,8 @@ namespace YouTubeProxy.Modules
         private dynamic GetProfiles(dynamic parameters)
         {
             var profiles = EncodingEngine.Profiles.LoadProfiles();
+            
+
             var currentProfile = Request.Cookies.ContainsKey("encoder") ? Request.Cookies["encoder"] : Settings.DefaultProfile;
 
             try
@@ -40,8 +44,12 @@ namespace YouTubeProxy.Modules
                 CurrentProfile = currentProfile,
                 Profiles = profiles.Select(p => p.Value).ToList()
             };
+
             
-            return View["Index", result].WithCookie(new NancyCookie("encoder", currentProfile, DateTime.Now.AddYears(1)));
+            
+            
+
+            return View["Index", result].WithCookie(new NancyCookie("encoder", currentProfile));
 
         }
     }

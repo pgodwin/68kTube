@@ -12,7 +12,25 @@
     "OutputExtension": "mov",
 
     "FriendlyName": "Apple Video",
-    "Description": "Recommended only for low-end Macintosh II machines. Poor Quality." 
+    "Description": "Recommended only for low-end Macintosh II machines. Poor Quality."
+  },
+  "animation": {
+    "Name": "animation",
+    "Exe": "QTConverter.exe",
+    "Arguments": "QuickTimeProfiles\\animation.xml {0} {1}.mov",
+    "OutputExtension": "mov",
+
+    "FriendlyName": "Animation (256Color 2FPS)",
+    "Description": "Recommended only for low-end Macintosh II machines. Poor Quality."
+  },
+   "audio": {
+    "Name": "audio",
+    "Exe": "QTConverter.exe",
+    "Arguments": "QuickTimeProfiles\\audio.xml {0} {1}.mov",
+    "OutputExtension": "mov",
+
+    "FriendlyName": "Audio Only (IMA 4:1 44k Stereo)",
+    "Description": "Audio only." 
   },
   "cinepak": {
     "Name": "cinepak",
@@ -22,19 +40,46 @@
     "FriendlyName": "Cinepak",
     "Description": "Recommended only for low-mid range 68k Macintosh machines. Relatively poor quality."
   },
+  "h261": {
+    "Name": "h261",
+    "Exe": "QTConverter.exe",
+    "Arguments": "QuickTimeProfiles\\h261.xml {0} {1}.mov",
+    "OutputExtension": "mov",
+    "FriendlyName": "H.261",
+    "Description": "Recommended only for mid-range 68k Macintosh machines. Relatively poor quality."
+  },
   "h263": {
     "Name": "h263",
-    "Exe": "ffmpeg.exe",
-    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(352/(iw*sar)\\,288/ih):ih*min(352/(iw*sar)\\,288/ih), pad=352:288:(352-iw*min(352/iw\\,288/ih))/2:(288-ih*min(352/iw\\,288/ih))/2\"  -vcodec h263 -b:v 150k -r 15 -acodec adpcm_ima_qt -ar 22050 -ac 1 -movflags +faststart \"{1}.mov\"",
-    //"Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(352/(iw*sar)\\,288/ih):ih*min(352/(iw*sar)\\,288/ih), pad=352:288:(352-iw*min(352/iw\\,288/ih))/2:(288-ih*min(352/iw\\,288/ih))/2\" -vcodec h263 -b:v 200k -r 15 -acodec adpcm_ima_qt -ar 22255 -ac 1 -movflags +faststart \"{1}.mov\"",
+    "Exe": "QTConverter.exe",
+    "Arguments": "QuickTimeProfiles\\h263.xml {0} {1}.mov",
     "OutputExtension": "mov",
     "FriendlyName": "H.263",
+    "Description": "Recommended only for low-mid range 68k Macintosh machines. Relatively poor quality."
+  },
+  "h263FFMPEG": {
+    "Name": "h263FFMPEG",
+    "Exe": "ffmpeg.exe",
+    // adpcm_ima_qt crashes quicktime on 68k macs!
+    //    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(352/(iw*sar)\\,288/ih):ih*min(352/(iw*sar)\\,288/ih), pad=352:288:(352-iw*min(352/iw\\,288/ih))/2:(288-ih*min(352/iw\\,288/ih))/2\"  -vcodec h263 -b:v 150k -r 15 -acodec adpcm_ima_qt -ar 22050 -ac 1 -movflags +faststart \"{1}.mov\"",
+    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(352/(iw*sar)\\,288/ih):ih*min(352/(iw*sar)\\,288/ih), pad=352:288:(352-iw*min(352/iw\\,288/ih))/2:(288-ih*min(352/iw\\,288/ih))/2\"  -vcodec h263 -b:v 150k -r 15 -acodec pcm_alaw -ar 22050 -ac 1 -movflags +faststart \"{1}.mov\"",
+    "OutputExtension": "mov",
+    "FriendlyName": "H.263 (FFMPEG)",
+    "Description": "Compatible with QuickTime 3 and onwards. Reasonably good quality and can be decompressed on a PPC Machine"
+  },
+  "h263FFMPEG-QCIF": {
+    "Name": "h263FFMPEG-QCIF", //176 × 144
+    "Exe": "ffmpeg.exe",
+    // adpcm_ima_qt crashes quicktime on 68k macs!
+    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(176/(iw*sar)\\,144/ih):ih*min(176/(iw*sar)\\,144/ih), pad=176:144:(176-iw*min(176/iw\\,144/ih))/2:(144-ih*min(176/iw\\,144/ih))/2\"  -vcodec h263 -b:v 150k -r 15 -acodec pcm_alaw -ar 22050 -ac 1 -movflags +faststart \"{1}.mov\"",
+    "OutputExtension": "mov",
+    "FriendlyName": "H.263 QCIF (FFMPEG)",
     "Description": "Compatible with QuickTime 3 and onwards. Reasonably good quality and can be decompressed on a fast 68kMachine"
   },
+  
   "sorrensonFFMPEG": {
     "Name": "sorrensonFFMPEG",
     "Exe": "ffmpeg.exe",
-    "Arguments": "-y -i \"{0}\" -vf scale=320:-1 -vcodec svq1 -b:v 500k -acodec adpcm_ima_qt -ar 22050 -ac 2 -movflags +faststart \"{1}.mov\"",
+    "Arguments": "-y -i \"{0}\" -vf scale=320:-1 -vcodec svq1 -b:v 500k -acodec pcm_alaw -ar 22050 -ac 2 -movflags +faststart \"{1}.mov\"",
     "OutputExtension": "mov",
     "FriendlyName": "Sorreson Video (FFMPEG)",
     "Description": "Sorrenson is supported on 68k and PPC machines in QuickTime3 or later. Requires a fast CPU to decode."
@@ -42,7 +87,7 @@
   "sorrenson": {
     "Name": "sorrenson",
     "Exe": "qtconverter.exe",
-    "Arguments": "QuickTimeProfiles\\quadra.xml {0} {1}.mov",
+    "Arguments": "QuickTimeProfiles\\sorenson.xml {0} {1}.mov",
     "OutputExtension": "mov",
     "FriendlyName": "Sorreson Video (QuickTime)",
     "Description": "Sorrenson is supported on 68k and PPC machines in QuickTime3 or later. Requires a fast CPU to decode."
