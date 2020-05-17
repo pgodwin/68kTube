@@ -5,6 +5,7 @@ C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.d
 C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.pdb
 C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\bin\Debug\MatrixIO.IO.dll
 C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\bin\Debug\MatrixIO.IO.pdb
-C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.csprojResolveAssemblyReference.cache
+C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.csprojAssemblyReference.cache
+C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.csproj.CoreCompileInputs.cache
 C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.dll
 C:\Users\pete\Repo\68kTube\BMFF\BMFF\MatrixIO.IO\obj\Debug\MatrixIO.IO.pdb

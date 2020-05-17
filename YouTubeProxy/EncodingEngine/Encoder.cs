@@ -83,8 +83,8 @@ namespace YouTubeProxy.EncodingEngine
                         throw new Exception("Encoder failed.");
 
                     // Make this an option on the encodeProfile
-                    //if (profile.OutputExtension == "mov")
-                      //  QuickTimeContainerConverter.MakeQuickTime3Compatible(outputFile + ".mov");
+                    if (profile.OutputExtension == "mov")
+                        QuickTimeContainerConverter.MakeQuickTime3Compatible(outputFile + ".mov");
 
                     Console.WriteLine("Encode Complete");
                     // TODO Check error status : exeProcess.ExitCode 

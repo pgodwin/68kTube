@@ -39,7 +39,7 @@ namespace YouTubeProxy.Controllers.MacApi
 
             if (video != null)
             {
-                var sourceUri = video.GetUri();
+                var sourceUri = video.Uri;//.GetUri();
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 string arguments = string.Format(testARgs, sourceUri, id);
                 startInfo.FileName = "ffmpeg.exe";

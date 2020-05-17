@@ -22,7 +22,9 @@ C:\Users\pete\Documents\GitHub\68kTube\QTConverter\obj\Debug\QTConverter.pdb
 C:\Users\pete\Repo\68kTube\bin\QTConverter.exe.config
 C:\Users\pete\Repo\68kTube\QTConverter\obj\Debug\QTConverter.exe
 C:\Users\pete\Repo\68kTube\QTConverter\obj\Debug\QTConverter.pdb
-C:\Users\pete\Repo\68kTube\QTConverter\obj\Debug\QTConverter.csprojResolveAssemblyReference.cache
 C:\Users\pete\Repo\68kTube\bin\PlaceHolder.mp4
 C:\Users\pete\Repo\68kTube\bin\QTConverter.exe
 C:\Users\pete\Repo\68kTube\bin\QTConverter.pdb
+C:\Users\pete\Repo\68kTube\QTConverter\obj\Debug\QTConverter.csprojAssemblyReference.cache
+C:\Users\pete\Repo\68kTube\QTConverter\obj\Debug\QTConverter.csproj.CoreCompileInputs.cache
+C:\Users\pete\Repo\68kTube\QTConverter\obj\Debug\QTConverter.csproj.CopyComplete

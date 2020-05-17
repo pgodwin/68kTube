@@ -45,11 +45,16 @@ namespace YouTubeProxy.Modules
                 Profiles = profiles.Select(p => p.Value).ToList()
             };
 
-            
-            
-            
 
-            return View["Index", result].WithCookie(new NancyCookie("encoder", currentProfile));
+
+
+            //if (Request.Query.returnUrl != null)
+            //{
+
+            //    Response.AsRedirect(Request.Query.returnUrl, Nancy.Responses.RedirectResponse.RedirectType.SeeOther);
+            //}
+            return View["Index", result]
+                .WithCookie(new NancyCookie("encoder", currentProfile));
 
         }
     }

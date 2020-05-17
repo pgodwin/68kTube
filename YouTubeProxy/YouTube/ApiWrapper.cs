@@ -77,7 +77,7 @@ namespace YouTubeProxy.YouTube
             // Grab a low res video compatible with quicktime...
             var video = youTube.GetAllVideos("http://www.youtube.com/watch?v=" + videoId).FirstOrDefault(v => v.Format == VideoFormat.Mp4 && v.Resolution <= 360);
 
-            var url = video.GetUri();
+            var url = video.Uri;//.GetUri();
 
             return new EncodeDetail(videoId, profile, url);
         }

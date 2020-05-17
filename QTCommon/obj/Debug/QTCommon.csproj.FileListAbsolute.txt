@@ -33,7 +33,6 @@ C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\AxInterop.QTOControlLi
 C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.csproj.ResolveComReference.cache
 C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.dll
 C:\Users\pete\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.pdb
-C:\Users\pete\Repo\68kTube\QTCommon\obj\Debug\QTCommon.csprojResolveAssemblyReference.cache
 C:\Users\pete\Repo\68kTube\QTCommon\obj\Debug\Interop.QTOControlLib.dll
 C:\Users\pete\Repo\68kTube\QTCommon\obj\Debug\Interop.QTOLibrary.dll
 C:\Users\pete\Repo\68kTube\QTCommon\obj\Debug\AxInterop.QTOControlLib.dll
@@ -46,3 +45,5 @@ C:\Users\pete\Repo\68kTube\QTCommon\bin\Debug\QTCommon.pdb
 C:\Users\pete\Repo\68kTube\QTCommon\bin\Debug\Interop.QTOControlLib.dll
 C:\Users\pete\Repo\68kTube\QTCommon\bin\Debug\AxInterop.QTOControlLib.dll
 C:\Users\pete\Repo\68kTube\QTCommon\bin\Debug\Interop.QTOLibrary.dll
+C:\Users\pete\Repo\68kTube\QTCommon\obj\Debug\QTCommon.csprojAssemblyReference.cache
+C:\Users\pete\Repo\68kTube\QTCommon\obj\Debug\QTCommon.csproj.CoreCompileInputs.cache
