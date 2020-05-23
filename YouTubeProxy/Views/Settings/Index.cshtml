@@ -1,7 +1,6 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<YouTubeProxy.Models.SettingsViewModel>
+﻿@model YouTubeProxy.Models.SettingsViewModel
 
 @{
-    Layout = "Views/Shared/_Layout.cshtml";
     ViewBag.Title = "68kTube - Settings";
 }
 
@@ -17,6 +16,7 @@
             @profile.Description
         </p>
     }
+    @Html.Hidden("returnUrl", Context.Request.Query["returnUrl"])
     <input type="submit" value="Save Settings" />
 </form>
 

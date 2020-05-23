@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -8,11 +9,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace YouTubeProxy.Controllers.MacApi
 {
-    public class RefMovController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class RefMovController : Controller
     {
 
         
@@ -24,7 +26,7 @@ namespace YouTubeProxy.Controllers.MacApi
             //using (var refMovie = new MemoryStream())
             var refMovie = new MemoryStream();
             {
-                var movieBytes = File.ReadAllBytes("RefTest.mov");
+                var movieBytes = System.IO.File.ReadAllBytes("RefTest.mov");
 
                 refMovie.Write(movieBytes, 0, movieBytes.Length);
 

@@ -40,7 +40,8 @@ namespace YouTubeProxy.EncodingEngine
 
             var profile = _profile[encoder];
             
-            var outputFile = Path.Combine(Settings.EncodeLocation, encodeDetails.DestinationFileName);
+            
+            var outputFile = Path.Combine(Path.Combine(Settings.EncodeLocation), encodeDetails.DestinationFileName);
 
 
             Console.WriteLine("Encode started for video {0} with {1}", videoId, encoder);
@@ -50,6 +51,7 @@ namespace YouTubeProxy.EncodingEngine
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = profile.Exe;
+            
             string arguments = string.Format(profile.Arguments, encodeDetails.SourceUrl, outputFile);
 
             Console.WriteLine("Running: {0} {1}", startInfo.FileName, arguments);

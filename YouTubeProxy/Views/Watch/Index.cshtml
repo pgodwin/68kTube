@@ -1,7 +1,6 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<YouTubeProxy.Models.WatchVideoModel>
+﻿@model YouTubeProxy.Models.WatchVideoModel
 
 @{
-    Layout = "Views/Shared/_Layout.cshtml";
     ViewBag.Title = "68kTube - " + @Model.Title;
     ViewBag.Refresh = Model.EncodeDetails.Progress.Status != YouTubeProxy.EncodingEngine.StatusCodes.ReadyForDownload;
 }
@@ -23,7 +22,7 @@ else // Video is still encoding
     @Model.EncodeDetails.Progress.Status.ToString()
     <table width="300" border="1">
         <tr>
-            <td width="@Model.EncodeDetails.Progress.Progress;%" bgcolor="#4286f4" align="center">
+            <td width="@(Model.EncodeDetails.Progress.Progress)%" bgcolor="#4286f4" align="center">
                 @Model.EncodeDetails.Progress.Progress%
             </td>
             <td width="@(100 - Model.EncodeDetails.Progress.Progress)%" bgcolor="#ffffff">&nbsp;</td>

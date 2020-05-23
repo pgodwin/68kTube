@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTConverter", "QTConverter\QTConverter.csproj", "{A99D53E3-D57C-4059-8AAA-979E2F9E9E1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTCommon", "QTCommon\QTCommon.csproj", "{0B1EE7AC-2D3C-400F-8BBD-0BF379B40D1C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTubeProxy", "YouTubeProxy\YouTubeProxy.csproj", "{3782F686-0E09-4E91-94EA-729B09F5CAC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixIO.IO", "BMFF\BMFF\MatrixIO.IO\MatrixIO.IO.csproj", "{EDC16014-ECA3-4B93-A849-B81EAC369DD2}"
 EndProject
@@ -17,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Win32Client", "Win32Client\
 	ProjectSection(ProjectDependencies) = postProject
 		{3782F686-0E09-4E91-94EA-729B09F5CAC4} = {3782F686-0E09-4E91-94EA-729B09F5CAC4}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B1A3119D-B6B6-4F9F-8417-AC5033416DA5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeProxy", "YouTubeProxy\YouTubeProxy.csproj", "{3782F686-0E09-4E91-94EA-729B09F5CAC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +34,6 @@ Global
 		{0B1EE7AC-2D3C-400F-8BBD-0BF379B40D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B1EE7AC-2D3C-400F-8BBD-0BF379B40D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B1EE7AC-2D3C-400F-8BBD-0BF379B40D1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3782F686-0E09-4E91-94EA-729B09F5CAC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3782F686-0E09-4E91-94EA-729B09F5CAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3782F686-0E09-4E91-94EA-729B09F5CAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3782F686-0E09-4E91-94EA-729B09F5CAC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EDC16014-ECA3-4B93-A849-B81EAC369DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EDC16014-ECA3-4B93-A849-B81EAC369DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDC16014-ECA3-4B93-A849-B81EAC369DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,8 +46,15 @@ Global
 		{ABEA9A3E-E9B0-417B-8DD1-76865FF57CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABEA9A3E-E9B0-417B-8DD1-76865FF57CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABEA9A3E-E9B0-417B-8DD1-76865FF57CD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3782F686-0E09-4E91-94EA-729B09F5CAC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3782F686-0E09-4E91-94EA-729B09F5CAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3782F686-0E09-4E91-94EA-729B09F5CAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3782F686-0E09-4E91-94EA-729B09F5CAC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C33813E7-4181-4D5B-B6FF-30022E6D4351}
 	EndGlobalSection
 EndGlobal

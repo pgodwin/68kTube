@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
@@ -10,12 +11,13 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
 using VideoLibrary;
 
 namespace YouTubeProxy.Controllers.MacApi
 {
-    public class StreamController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class StreamController : Controller
     {
         public static string rtspServer = Settings.RtspServer;
 

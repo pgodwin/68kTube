@@ -1,5 +1,6 @@
 ﻿using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,13 +9,14 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Http;
 using YouTubeProxy.Helpers;
 using YouTubeProxy.Models;
 
 namespace YouTubeProxy.Controllers.MacApi
 {
-    public class SearchController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class SearchController : Controller
     {
 
         public async Task<MacDeliminatedResult<SearchResultModel>> Get(string id)
@@ -40,7 +42,7 @@ namespace YouTubeProxy.Controllers.MacApi
                 Title = v.Snippet.Title,
                 Description = v.Snippet.Description,
                 Url = "",
-                ThumbUrl = v.Snippet.Thumbnails.Default__.Url.Replace("https://", "http://")
+                ThumbUrl = v.Snippet.Thumbnails.Default__.Url.Replace("https://", "http://") // TODO - proxy the thumbs
             });
 
             return new MacDeliminatedResult<SearchResultModel>(results);

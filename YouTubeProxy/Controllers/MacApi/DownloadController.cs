@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -8,15 +9,17 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Http;
 using YouTubeProxy.Helpers;
 
 namespace YouTubeProxy.Controllers.MacApi
 {
-    public class DownloadController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class DownloadController : Controller
     {
         [HttpGet]
         [ActionName("qtl")]
+        [HttpGet("qtl/{id}")]
         public QtlResult GetQtl(string id)
         {
             var uri = new UriBuilder(Url.Link("DownloadApi", new { controller = "Download", action = "mov", id = id }));
@@ -25,6 +28,7 @@ namespace YouTubeProxy.Controllers.MacApi
         }
 
         [ActionName("html")]
+        [HttpGet("html/{id}")]
         public QtEmbedResult GetHtml(string id)
         {
             //return new QtEmbedResult(Url.Link("DefaultApi", new { controller = "Download", action = "mov", id = id }));
@@ -35,33 +39,19 @@ namespace YouTubeProxy.Controllers.MacApi
 
 
         [ActionName("mov")]
-        public HttpResponseMessage GetMov(string id)
+        [HttpGet("mov/{id}")]
+        public IActionResult GetMov(string id)
         {
             Console.WriteLine("Movie requested {0}", id);
-            //if (!GlobalStatus.ConversionStatus.ContainsKey(id))
-              //  return new HttpResponseMessage(HttpStatusCode.NotFound);
-
-            //var status = GlobalStatus.ConversionStatus[id];
-
-           // if (status.Status != Models.ConversionStatusModel.StatusCodes.ReadyForDownload)
-             //   return new HttpResponseMessage(HttpStatusCode.NotFound);
-
-            //var path = @".\video\" + id;
-            
+       
+           
             var path = Directory.EnumerateFiles(Settings.EncodeLocation, id + ".*").FirstOrDefault(); ;
 
             if (path == null)
-                return new HttpResponseMessage(HttpStatusCode.NotFound);
-            
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            
+                return NotFound();
             var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            return File(stream, "video/quicktime");
 
-            
-            result.Content = new StreamContent(stream);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("video/quicktime");
-            result.Content.Headers.ContentLength = stream.Length;
-            return result;
             
         }
 

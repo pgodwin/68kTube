@@ -1,7 +1,7 @@
-﻿using System.IO;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Web.Http;
 using VideoLibrary;
 using YouTubeProxy.EncodingEngine;
 using YouTubeProxy.Helpers;
@@ -9,7 +9,9 @@ using YouTubeProxy.Models;
 
 namespace YouTubeProxy.Controllers.MacApi
 {
-    public class VideoController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class VideoController : Controller
     {
         public MacDeliminatedResult<ConversionStatusModel> Get(string id, string profile)
         {

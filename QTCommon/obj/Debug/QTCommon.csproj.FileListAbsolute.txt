@@ -47,3 +47,16 @@ C:\Users\pete\Repo\68kTube\QTCommon\bin\Debug\AxInterop.QTOControlLib.dll
 C:\Users\pete\Repo\68kTube\QTCommon\bin\Debug\Interop.QTOLibrary.dll
 C:\Users\pete\Repo\68kTube\QTCommon\obj\Debug\QTCommon.csprojAssemblyReference.cache
 C:\Users\pete\Repo\68kTube\QTCommon\obj\Debug\QTCommon.csproj.CoreCompileInputs.cache
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\bin\Debug\PlaceHolder.mp4
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\bin\Debug\QTCommon.dll
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\bin\Debug\QTCommon.pdb
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\bin\Debug\Interop.QTOControlLib.dll
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\bin\Debug\Interop.QTOLibrary.dll
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\bin\Debug\AxInterop.QTOControlLib.dll
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.csprojAssemblyReference.cache
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\obj\Debug\Interop.QTOControlLib.dll
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\obj\Debug\Interop.QTOLibrary.dll
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\obj\Debug\AxInterop.QTOControlLib.dll
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.csproj.ResolveComReference.cache
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.dll
+C:\Users\Peter\Documents\GitHub\68kTube\QTCommon\obj\Debug\QTCommon.pdb
