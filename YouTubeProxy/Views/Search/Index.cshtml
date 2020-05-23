@@ -6,14 +6,32 @@
 }
 
 <h2>Search for @Model.SearchTerms</h2>
+<table border="0">
 
-@foreach (var result in Model.Results)
-{
-        <a href="/watch/@result.VideoId">
-            <img src="@result.ThumbUrl" align="left" border="1" />
-        </a>
-        <h3><a href="/watch/@result.VideoId">@result.Title</a></h3>
-        <p>@result.Description</p>
-        <p>&nbsp;</p>
+
+    @foreach (var result in Model.Results)
+    {
+        <tr>
+            <td valign="top">
+                <a href="/watch/@result.VideoId">
+                    <img src="@result.ThumbUrl" align="left" border="1" />
+                </a>
+            </td>
+            <td valign="top">
+                <h3><a href="/watch/@result.VideoId">@result.Title</a></h3>
+                <p>@result.Description</p>
+
+            </td>
+
+        </tr>
 
     }
+</table>
+@if (Model.PreviousPageToken != null)
+{
+    <a href="/search?q=@Model.SearchTerms&page=@Model.PreviousPageToken">Previous Page</a>
+}
+@if (Model.NextPageToken != null)
+{
+    <a href="/search?q=@Model.SearchTerms&page=@Model.NextPageToken">Next Page</a>
+}

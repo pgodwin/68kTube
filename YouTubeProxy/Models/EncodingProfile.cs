@@ -16,5 +16,14 @@ namespace YouTubeProxy.Models
         public string Exe { get; set; }
         public string Arguments { get; set; }
         public string OutputExtension { get; set; }
+
+        public int Width { get; set; }
+
+        public int Height { get; set; }
+
+        public float Scale { get; set; } = 1.0f;
+
+        public string ScaleMode { get; set; } = "tofit";
+
     }
 }

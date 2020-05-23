@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YouTubeProxy.Models;
 
 namespace YouTubeProxy.EncodingEngine
 {
@@ -16,7 +17,7 @@ namespace YouTubeProxy.EncodingEngine
             VideoId = videoId;
             SourceUrl = url;
             EncodeProfileName = profile;
-
+            
             DestinationFileName = FileId.ToString();
             Progress = new EncodingEngine.EncodeProgress()
             {
@@ -37,6 +38,7 @@ namespace YouTubeProxy.EncodingEngine
 
         public EncodeProgress Progress { get; set; }
 
+        public EncodingProfile Profile { get; set; }
     }
 
     public class EncodeProgress
