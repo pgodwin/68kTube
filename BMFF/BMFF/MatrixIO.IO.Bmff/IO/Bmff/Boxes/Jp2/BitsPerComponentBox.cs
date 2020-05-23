@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
@@ -10,58 +7,68 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Bits Per Component Box ("bpcc")
     /// </summary>
     [Box("bpcc", "Bits Per Component Box")]
-    public class BitsPerComponentBox : Box, ITableBox<BitsPerComponentBox.ComponentBitsEntry>
+    public sealed class BitsPerComponentBox : Box, ITableBox<BitsPerComponentBox.ComponentBitsEntry>
     {
-        public BitsPerComponentBox() : base() { }
-        public BitsPerComponentBox(Stream stream) : base(stream) { }
+        public BitsPerComponentBox() 
+            : base() { }
+
+        public BitsPerComponentBox(Stream stream) 
+            : base(stream) { }
+
+        public ComponentBitsEntry[] Entries { get; set; }
+
+        public int EntryCount => Entries.Length;
 
         internal override ulong CalculateSize()
         {
-            return base.CalculateSize() + (ulong)_Entries.Count;
+            return base.CalculateSize() + (ulong)Entries.Length;
         }
 
         protected override void LoadFromStream(Stream stream)
         {
             base.LoadFromStream(stream);
 
+            var entries = new List<ComponentBitsEntry>();
+
             // TODO: Read in as a byte array and convert to List<ComponentBitsEntry>
             while (stream.Position < (long)(Offset + EffectiveSize))
             {
                 byte b = stream.ReadOneByte();
-                _Entries.Add(new ComponentBitsEntry(b));
+
+                entries.Add(new ComponentBitsEntry(b));
             }
+
+            Entries = entries.ToArray();
         }
 
         protected override void SaveToStream(Stream stream)
         {
             base.SaveToStream(stream);
 
-            // TODO: Convert to byte[] and write all at once.
-            foreach (ComponentBitsEntry entry in _Entries)
+            var data = new byte[Entries.Length];
+
+            for (var i = 0; i < Entries.Length; i++)
             {
-                stream.WriteOneByte(entry.ComponentBits);
+                data[i] = Entries[i].ComponentBits;
             }
+
+            stream.Write(data, 0, data.Length);
         }
 
-        private IList<ComponentBitsEntry> _Entries = Portability.CreateList<ComponentBitsEntry>();
-        public IList<ComponentBitsEntry> Entries { get { return _Entries; } }
-
-        public int EntryCount { get { return _Entries.Count; } }
-
-        public class ComponentBitsEntry
+        public readonly struct ComponentBitsEntry
         {
-            public byte ComponentBits { get; set; }
-
-            public ComponentBitsEntry() { }
             public ComponentBitsEntry(byte componentBits)
             {
                 ComponentBits = componentBits;
             }
 
+            public byte ComponentBits { get; }
+
             public static implicit operator byte(ComponentBitsEntry entry)
             {
                 return entry.ComponentBits;
             }
+
             public static implicit operator ComponentBitsEntry(byte componentBits)
             {
                 return new ComponentBitsEntry(componentBits);

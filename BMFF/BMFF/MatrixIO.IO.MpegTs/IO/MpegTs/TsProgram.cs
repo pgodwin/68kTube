@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using MatrixIO.IO.MpegTs.Streams;
 using MatrixIO.IO.MpegTs.Tables;
 
@@ -17,22 +16,26 @@ namespace MatrixIO.IO.MpegTs
     public class TsProgram
     {
         private readonly object _syncObject = new object();
-
-        public ushort ProgramNumber { get; private set; }
-        public TsProgramStatus Status { get; internal set; }
-        public TableStream ProgramMapStream { get; internal set; }
-        public IList<TsStream> Streams { get; private set; }
-        public IList<TsDescriptor> Info { get; private set; }
-
-        public event EventHandler<ProgramStreamEventArgs> StreamAdded;
-
+        
         public TsProgram(ushort programNumber, TableStream programMapStream)
         {
             ProgramNumber = programNumber;
             ProgramMapStream = programMapStream;
             ProgramMapStream.UnitReceived += ProgramMapTableReceived;
-            Streams = Portability.CreateList<TsStream>();
+            Streams = new List<TsStream>();
         }
+
+        public ushort ProgramNumber { get; private set; }
+
+        public TsProgramStatus Status { get; internal set; }
+
+        public TableStream ProgramMapStream { get; internal set; }
+
+        public IList<TsStream> Streams { get; private set; }
+
+        public IList<TsDescriptor> Info { get; private set; }
+
+        public event EventHandler<ProgramStreamEventArgs> StreamAdded;
 
         void ProgramMapTableReceived(object sender, TsStreamEventArgs eventArgs)
         {
@@ -80,7 +83,7 @@ namespace MatrixIO.IO.MpegTs
 
         private void OnStreamAdded(TsStream stream)
         {
-            if (StreamAdded != null) StreamAdded(this, new ProgramStreamEventArgs() { Stream = stream });
+            StreamAdded?.Invoke(this, new ProgramStreamEventArgs() { Stream = stream });
         }
 
         public override string ToString()
@@ -89,7 +92,7 @@ namespace MatrixIO.IO.MpegTs
         }
     }
 
-    public class ProgramStreamEventArgs : EventArgs
+    public sealed class ProgramStreamEventArgs : EventArgs
     {
         public TsStream Stream { get; set; }
     }

@@ -1,7 +1,5 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
@@ -10,27 +8,17 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Track Reference Box ("tref")
     /// </summary>
     [Box("tref", "Track Reference Box")]
-    public class TrackReferenceBox : Box, ISuperBox
+    public sealed class TrackReferenceBox : Box, ISuperBox
     {
         public TrackReferenceBox() : base() { }
         public TrackReferenceBox(Stream stream) : base(stream) { }
 
-        public int EntryCount { get { return _Children.Count; } }
+        public IList<Box> Children { get; } = new List<Box>();
 
-        private IList<Box> _Children = Portability.CreateList<Box>();
-        public IList<Box> Children
-        {
-            get { return _Children; }
-        }
+        public int EntryCount => Children.Count;
 
-        public IEnumerator<Box> GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        public IEnumerator<Box> GetEnumerator() => Children.GetEnumerator();
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => Children.GetEnumerator();
     }
 }

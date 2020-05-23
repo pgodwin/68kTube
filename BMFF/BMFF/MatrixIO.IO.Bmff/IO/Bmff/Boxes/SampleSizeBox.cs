@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -10,14 +6,27 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Sample Size Box ("stsz")
     /// </summary>
     [Box("stsz", "Sample Size Box")]
-    public class SampleSizeBox : FullBox, ITableBox<SampleSizeBox.SampleSizeEntry>
+    public sealed class SampleSizeBox : FullBox, ITableBox<SampleSizeBox.SampleSizeEntry>
     {
-        public SampleSizeBox() : base() { }
-        public SampleSizeBox(Stream stream) : base(stream) { }
+        private uint _sampleCount;
+
+        public SampleSizeBox() 
+            : base() { }
+
+        public SampleSizeBox(Stream stream) 
+            : base(stream) { }
+
+        public uint SampleSize { get; set; }
+
+        public uint SampleCount => (SampleSize == 0) ? (uint)Entries.Length : _sampleCount;
+
+        public SampleSizeEntry[] Entries { get; set; }
+
+        public uint EntryCount => (uint)Entries.Length;
 
         internal override ulong CalculateSize()
         {
-            return base.CalculateSize() + 4 + 4 + ((ulong)_Entries.Count * 4);
+            return base.CalculateSize() + 4 + 4 + ((ulong)Entries.Length * 4);
         }
 
         protected override void LoadFromStream(Stream stream)
@@ -25,13 +34,15 @@ namespace MatrixIO.IO.Bmff.Boxes
             base.LoadFromStream(stream);
 
             SampleSize = stream.ReadBEUInt32();
-            _SampleCount = stream.ReadBEUInt32();
+            _sampleCount = stream.ReadBEUInt32();
+
+            Entries = new SampleSizeEntry[_sampleCount];
 
             if (SampleSize == 0)
             {
-                for (uint i = 0; i < _SampleCount; i++)
+                for (int i = 0; i < _sampleCount; i++)
                 {
-                    _Entries.Add(new SampleSizeEntry(stream.ReadBEUInt32()));
+                    Entries[i] = new SampleSizeEntry(stream.ReadBEUInt32());
                 }
             }
         }
@@ -43,49 +54,20 @@ namespace MatrixIO.IO.Bmff.Boxes
             stream.WriteBEUInt32(SampleSize);
             stream.WriteBEUInt32(SampleCount);
 
-            foreach (SampleSizeEntry SampleSizeEntry in _Entries)
+            foreach (SampleSizeEntry SampleSizeEntry in Entries)
             {
                 stream.WriteBEUInt32(SampleSizeEntry.EntrySize);
             }
         }
 
-        private IList<SampleSizeEntry> _Entries = Portability.CreateList<SampleSizeEntry>();
-        public IList<SampleSizeEntry> Entries
+        public readonly struct SampleSizeEntry
         {
-            get
-            {
-                return _Entries;
-            }
-        }
-
-        public uint SampleSize { get; set; }
-        private uint _SampleCount;
-        public uint SampleCount 
-        { 
-            get 
-            { 
-                if(SampleSize == 0) return (uint)_Entries.Count;
-                return _SampleCount;
-            } 
-        }
-
-        public uint EntryCount
-        {
-            get
-            {
-                return (uint)_Entries.Count;
-            }
-        }
-
-        public class SampleSizeEntry
-        {
-            public uint EntrySize { get; set; }
-
-            public SampleSizeEntry() { }
             public SampleSizeEntry(uint entrySize)
             {
                 EntrySize = entrySize;
             }
+
+            public uint EntrySize { get; }
 
             public static implicit operator uint(SampleSizeEntry entry)
             {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
@@ -10,14 +7,18 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Chunk Offset Box ("stco")
     /// </summary>
     [Box("stco", "Chunk Offset Box")]
-    public class ChunkOffsetBox : FullBox, ITableBox<ChunkOffsetBox.ChunkOffsetEntry>
+    public sealed class ChunkOffsetBox : FullBox, ITableBox<ChunkOffsetBox.ChunkOffsetEntry>
     {
         public ChunkOffsetBox() : base() { }
         public ChunkOffsetBox(Stream stream) : base(stream) { }
 
+        public ChunkOffsetEntry[] Entries { get; set; }
+
+        public int EntryCount => Entries.Length;
+
         internal override ulong CalculateSize()
         {
-            return base.CalculateSize() + 4 + ((ulong)_Entries.Count * 4);
+            return base.CalculateSize() + 4 + ((ulong)Entries.Length * 4);
         }
 
         protected override void LoadFromStream(Stream stream)
@@ -26,9 +27,11 @@ namespace MatrixIO.IO.Bmff.Boxes
 
             uint entryCount = stream.ReadBEUInt32();
 
+            Entries = new ChunkOffsetEntry[entryCount];
+
             for (uint i = 0; i < entryCount; i++)
             {
-                _Entries.Add(new ChunkOffsetEntry(stream.ReadBEUInt32()));
+                Entries[i] = new ChunkOffsetEntry(stream.ReadBEUInt32());
             }
         }
 
@@ -36,39 +39,30 @@ namespace MatrixIO.IO.Bmff.Boxes
         {
             base.SaveToStream(stream);
 
-            stream.WriteBEUInt32((uint)_Entries.Count);
+            stream.WriteBEUInt32((uint)Entries.Length);
 
-            foreach (ChunkOffsetEntry chunkOffsetEntry in _Entries)
+            for (int i = 0; i < Entries.Length; i++)
             {
-                stream.WriteBEUInt32(chunkOffsetEntry.ChunkOffset);
+                ref ChunkOffsetEntry entry = ref Entries[i];
+
+                stream.WriteBEUInt32(entry.ChunkOffset);
             }
         }
 
-        private IList<ChunkOffsetEntry> _Entries = Portability.CreateList<ChunkOffsetEntry>();
-        public IList<ChunkOffsetEntry> Entries 
+        public readonly struct ChunkOffsetEntry
         {
-            get
-            {
-                return _Entries;
-            }
-        }
-
-        public int EntryCount { get { return _Entries.Count; } }
-
-        public class ChunkOffsetEntry
-        {
-            public uint ChunkOffset { get; set; }
-
-            public ChunkOffsetEntry() { }
             public ChunkOffsetEntry(uint chunkOffset)
             {
                 ChunkOffset = chunkOffset;
             }
 
+            public uint ChunkOffset { get; }
+
             public static implicit operator uint(ChunkOffsetEntry entry)
             {
                 return entry.ChunkOffset;
             }
+
             public static implicit operator ChunkOffsetEntry(uint chunkOffset)
             {
                 return new ChunkOffsetEntry(chunkOffset);

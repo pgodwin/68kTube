@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Text;
 
 namespace MatrixIO.IO.Bmff
 {
@@ -11,59 +10,58 @@ namespace MatrixIO.IO.Bmff
     /// </summary>
     public class BaseMediaReader
     {
-        public Stream BaseStream { get; private set; }
-        public BaseMediaOptions Options { get; private set; }
+        private readonly Stack<Box> _boxStack = new Stack<Box>();
 
         public BaseMediaReader(Stream stream, BaseMediaOptions options = BaseMediaOptions.None)
         {
-            if (stream.CanSeek && stream.Position!=0) stream.Seek(0, SeekOrigin.Begin);
+            if (stream.CanSeek && stream.Position != 0) stream.Seek(0, SeekOrigin.Begin);
             BaseStream = stream;
             Options = options;
         }
 
-        private readonly Stack<Box> _boxStack = new Stack<Box>();
+        public Stream BaseStream { get; }
+
+        public BaseMediaOptions Options { get; }
 
         public string CurrentPath
         {
             get
             {
                 var path = new StringBuilder();
-                foreach(var box in _boxStack) 
+                foreach (var box in _boxStack)
                 {
-                    if(path.Length > 0) path.Append("|");
+                    if (path.Length > 0)
+                    {
+                        path.Append('|');
+                    }
+
                     path.Append(box.ToString());
                 }
                 return path.ToString();
             }
         }
 
-        public int Depth
-        {
-            get
-            {
-                return _boxStack.Count;
-            }
-        }
+        public int Depth => _boxStack.Count;
 
         public Box CurrentBox
         {
             get
             {
-                if(_boxStack.Count == 0) _boxStack.Push(Box.FromStream(BaseStream, BaseMediaOptions.None));
+                if (_boxStack.Count == 0)
+                {
+                    _boxStack.Push(Box.FromStream(BaseStream, BaseMediaOptions.None));
+                }
+
                 return _boxStack.Peek();
             }
         }
 
-        public bool HasChildren
-        {
-            get {
-                return CurrentBox is ISuperBox;
-            }
-        }
+        public bool HasChildren => CurrentBox is ISuperBox;
 
         public void NextSibling()
         {
             CurrentBox.Sync(BaseStream, false);
+
             if (Depth > 1)
             {
                 _boxStack.Pop();
@@ -79,7 +77,8 @@ namespace MatrixIO.IO.Bmff
                 //if (currentSuperBox.Children != null & currentSuperBox.Children.Count > 0) ;
                 throw new NotImplementedException();
             }
-            else NextSibling();
+
+            NextSibling();
         }
     }
 }

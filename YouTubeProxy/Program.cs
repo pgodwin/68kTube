@@ -16,7 +16,7 @@ namespace YouTubeProxy
         public static void Main(string[] args)
         {
             // Used later to ensure the atoms are in the correct order for QT3
-            Helpers.BmffPortabilityFactory _pf = new Helpers.BmffPortabilityFactory();
+            //Helpers.BmffPortabilityFactory _pf = new Helpers.BmffPortabilityFactory();
             var currentDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             Directory.SetCurrentDirectory(currentDir);
 

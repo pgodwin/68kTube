@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
+using MatrixIO.IO.Numerics;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -10,10 +7,23 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Track Clean Aperture Dimensions Atom ("clef")
     /// </summary>
     [Box("clef", "Track Clean Aperture Dimensions Atom")]
-    public class TrackCleanApertureDimensionsBox : FullBox
+    public sealed class TrackCleanApertureDimensionsBox : FullBox
     {
-        public TrackCleanApertureDimensionsBox() : base() { }
-        public TrackCleanApertureDimensionsBox(Stream stream) : base(stream) { }
+        public TrackCleanApertureDimensionsBox() 
+            : base() { }
+
+        public TrackCleanApertureDimensionsBox(Stream stream) 
+            : base(stream) { }
+
+        /// <summary>
+        /// 16.16 Fixed-Point Number
+        /// </summary>
+        public FixedPoint_16_16 Width { get; set; }
+
+        /// <summary>
+        /// 16.16 Fixed-Point Number
+        /// </summary>
+        public FixedPoint_16_16 Height { get; set; }
 
         internal override ulong CalculateSize()
         {
@@ -32,42 +42,8 @@ namespace MatrixIO.IO.Bmff.Boxes
         {
             base.SaveToStream(stream);
 
-            stream.WriteBEUInt32(Width);
-            stream.WriteBEUInt32(Height);
-        }
-
-        /// <summary>
-        /// 16.16 Fixed-Point Number
-        /// </summary>
-        public uint Width { get; set; }
-        public double WidthAsDouble
-        {
-            get
-            {
-                double decimalWidth = (double)Width;
-                return decimalWidth / 65536;
-            }
-            set
-            {
-                Width = (uint)Math.Round(value * 65536, 0);
-            }
-        }
-
-        /// <summary>
-        /// 16.16 Fixed-Point Number
-        /// </summary>
-        public uint Height { get; set; }
-        public double HeightAsDouble
-        {
-            get
-            {
-                double decimalHeight = (double)Height;
-                return decimalHeight / 65536;
-            }
-            set
-            {
-                Height = (uint)Math.Round(value * 65536, 0);
-            }
+            stream.WriteBEUInt32(Width.Value);
+            stream.WriteBEUInt32(Height.Value);
         }
     }
 }

@@ -1,140 +1,111 @@
 ﻿using System;
+using System.Buffers.Binary;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using MatrixIO.IO.Bmff;
+
+using MatrixIO.IO.Bmff.Boxes;
 
 namespace MatrixIO.IO.Bmff
 {
     public class BmffReader : ISuperBox, IEnumerable<Box>
     {
-        private readonly Stream _baseStream;
-        public Stream BaseStream { get { return _baseStream; } }
-
-        private IList<Box> _rootBoxes;
-        public IList<Box> RootBoxes
-        {
-            get
-            {
-#pragma warning disable 612,618
-                if (_rootBoxes == null) return _rootBoxes = Portability.CreateList<Box>(GetBoxes());
-#pragma warning restore 612,618
-                return _rootBoxes;
-            }
-        }
-
-        public bool RandomAccess { get { return _baseStream.CanSeek; } }
-
-        #region Navigation
         private readonly Stack<Box> _boxStack = new Stack<Box>();
-
-        public int Depth
-        {
-            get
-            {
-                return _boxStack.Count;
-            }
-        }
-
-        public Box CurrentBox
-        {
-            get
-            {
-                return _boxStack.Peek();
-            }
-        }
-
-        public bool HasChildren
-        {
-            get
-            {
-                if (CurrentBox is ISuperBox) return true;
-                else return false;
-            }
-        }
-        #endregion
+        private IList<Box> _rootBoxes;
 
         public BmffReader(Stream stream)
         {
-            if (stream.CanSeek && stream.Position!=0) stream.Seek(0, SeekOrigin.Begin);
-            _baseStream = stream;
+            if (stream.CanSeek && stream.Position != 0)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+
+            BaseStream = stream;
         }
 
-        [Obsolete("Use the BaseMedia class instead.")]
-        public void Scan()
-        {
-            GetBoxes();
-        }
+        public Stream BaseStream { get; }
+
+        public IList<Box> RootBoxes => _rootBoxes ?? (_rootBoxes = new List<Box>(GetBoxes()));
+
+        public bool RandomAccess => BaseStream.CanSeek;
+
+        public int Depth => _boxStack.Count;
+
+        public Box CurrentBox => _boxStack.Peek();
+
+        public bool HasChildren => CurrentBox is ISuperBox;
 
         /// <summary>
         /// Traverses the tree of Boxes in file order (depth-first)
         /// </summary>
         /// <returns>IEnumerable collection of Box types in file order.</returns>
-        [Obsolete("Use the BaseMedia class instead.")]
         public IEnumerable<Box> GetBoxes()
         {
             Box box = null;
+
             do
             {
-                box = Box.FromStream(_baseStream);
-                if (box != null) yield return box;
-            } while (box != null);
+                box = Box.FromStream(BaseStream);
+
+                if (box != null)
+                {
+                    yield return box;
+                }
+            }
+            while (box != null);
         }
+
         /// <summary>
         /// Seeks to the beginning of the file and reads the "ftyp" Box.
         /// </summary>
         /// <returns>FileTypeBox</returns>
         [Obsolete]
-        public Boxes.FileTypeBox GetFileTypeBox()
+        public FileTypeBox GetFileTypeBox()
         {
-            if (_baseStream.CanSeek && _baseStream.Position!=0) _baseStream.Seek(0, SeekOrigin.Begin);
+            if (BaseStream.CanSeek && BaseStream.Position != 0)
+            {
+                BaseStream.Seek(0, SeekOrigin.Begin);
+            }
 
             // TODO: Support files where "ftyp" is not the first FourCC like JPEG2000.
-            return Box.FromStream<Boxes.FileTypeBox>(_baseStream);
+
+            return Box.FromStream<FileTypeBox>(BaseStream);
         }
 
         /// <summary>
-        /// Seek to the end of the file and returns the "mfro" Box for a Microsoft Smooth Streaming PIFF format file that gives
+        /// Seek to the end of the file and returns the "mfro" Box for a 
+        /// Microsoft Smooth Streaming PIFF format file that gives
         /// you the chunk offsets within the file.
         /// </summary>
         /// <returns>MovieFragmentRandomAccessBox</returns>
         // TODO: Move to a new MatrixIO.IO.Piff.??? class
-        public Boxes.MovieFragmentRandomAccessBox GetMovieFragmentRandomAccessBox()
+        public MovieFragmentRandomAccessBox GetMovieFragmentRandomAccessBox()
         {
-            _baseStream.Seek(-24, SeekOrigin.End);
+            BaseStream.Seek(-24, SeekOrigin.End);
 
-            byte[] mfrobuf = _baseStream.ReadBytes(24);
+            byte[] mfrobuf = BaseStream.ReadBytes(24);
 
             uint mfraOffset;
-            if (BitConverter.ToUInt32(mfrobuf, 12).NetworkToHostOrder() == 0x6d66726f ||
-                BitConverter.ToUInt32(mfrobuf, 4).NetworkToHostOrder() == 0x6d66726f) // 'mfro'
+
+            if (BinaryPrimitives.ReadUInt32BigEndian(mfrobuf.AsSpan(12, 4)) == 0x6d66726f ||
+                BinaryPrimitives.ReadUInt32BigEndian(mfrobuf.AsSpan(4, 4)) == 0x6d66726f) // 'mfro'
             {
-                mfraOffset = BitConverter.ToUInt32(mfrobuf, 20).NetworkToHostOrder();
+                mfraOffset = BinaryPrimitives.ReadUInt32BigEndian(mfrobuf.AsSpan(20, 4));
             }
-            else return null;
+            else
+            {
+                return null;
+            }
 
-            _baseStream.Seek(-mfraOffset, SeekOrigin.End);
+            BaseStream.Seek(-mfraOffset, SeekOrigin.End);
 
-            return new Boxes.MovieFragmentRandomAccessBox(_baseStream);
+            return new MovieFragmentRandomAccessBox(BaseStream);
         }
 
-        [Obsolete("Use the BaseMedia class instead.")]
-        IList<Box> ISuperBox.Children
-        {
-            get { return RootBoxes; }
-        }
+        IList<Box> ISuperBox.Children => RootBoxes;
 
-        [Obsolete("Use the BaseMedia class instead.")]
-        IEnumerator<Box> IEnumerable<Box>.GetEnumerator()
-        {
-            return RootBoxes.GetEnumerator();
-        }
+        IEnumerator<Box> IEnumerable<Box>.GetEnumerator() => RootBoxes.GetEnumerator();
 
-        [Obsolete("Use the BaseMedia class instead.")]
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return RootBoxes.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => RootBoxes.GetEnumerator();
     }
 }

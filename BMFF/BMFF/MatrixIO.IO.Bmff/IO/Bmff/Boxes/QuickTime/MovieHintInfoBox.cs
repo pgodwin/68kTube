@@ -1,7 +1,5 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
@@ -10,16 +8,12 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Movie Hint Info Atom ("hnti")
     /// </summary>
     [Box("hnti", "Movie Hint Info Atom")]
-    public class MovieHintInfoBox : Box, ISuperBox
+    public sealed class MovieHintInfoBox : Box, ISuperBox
     {
         public MovieHintInfoBox() : base() { }
         public MovieHintInfoBox(Stream stream) : base(stream) { }
 
-        private IList<Box> _Children = Portability.CreateList<Box>();
-        public IList<Box> Children
-        {
-            get { return _Children; }
-        }
+        public IList<Box> Children { get; } = new List<Box>();
 
         internal override ulong CalculateSize()
         {
@@ -31,14 +25,8 @@ namespace MatrixIO.IO.Bmff.Boxes
             base.SaveChildrenToStream(stream);
         }
 
-        public IEnumerator<Box> GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        public IEnumerator<Box> GetEnumerator() => Children.GetEnumerator();
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => Children.GetEnumerator();
     }
 }

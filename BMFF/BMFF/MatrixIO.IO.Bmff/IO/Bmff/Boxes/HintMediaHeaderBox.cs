@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -10,10 +6,23 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Hint Media Header Box ("hmhd")
     /// </summary>
     [Box("hmhd", "Hint Media Header Box")]
-    public class HintMediaHeaderBox : FullBox
+    public sealed class HintMediaHeaderBox : FullBox
     {
-        public HintMediaHeaderBox() : base() { }
-        public HintMediaHeaderBox(Stream stream) : base(stream) { }
+        public HintMediaHeaderBox() 
+            : base() { }
+
+        public HintMediaHeaderBox(Stream stream) 
+            : base(stream) { }
+
+        public ushort MaxProtocolDataUnitSize { get; set; }
+
+        public ushort AverageProtocolDataUnitSize { get; set; }
+
+        public uint MaxBitrate { get; set; }
+
+        public uint AverageBitrate { get; set; }
+
+        private uint Reserved { get; set; }
 
         internal override ulong CalculateSize()
         {
@@ -28,7 +37,7 @@ namespace MatrixIO.IO.Bmff.Boxes
             AverageProtocolDataUnitSize = stream.ReadBEUInt16();
             MaxBitrate = stream.ReadBEUInt32();
             AverageBitrate = stream.ReadBEUInt32();
-            _Reserved = stream.ReadBEUInt32();
+            Reserved = stream.ReadBEUInt32();
         }
 
         protected override void SaveToStream(Stream stream)
@@ -39,13 +48,7 @@ namespace MatrixIO.IO.Bmff.Boxes
             stream.WriteBEUInt16(AverageProtocolDataUnitSize);
             stream.WriteBEUInt32(MaxBitrate);
             stream.WriteBEUInt32(AverageBitrate);
-            stream.WriteBEUInt32(_Reserved);
+            stream.WriteBEUInt32(Reserved);
         }
-
-        public ushort MaxProtocolDataUnitSize { get; set; }
-        public ushort AverageProtocolDataUnitSize { get; set; }
-        public uint MaxBitrate { get; set; }
-        public uint AverageBitrate { get; set; }
-        private uint _Reserved;
     }
 }

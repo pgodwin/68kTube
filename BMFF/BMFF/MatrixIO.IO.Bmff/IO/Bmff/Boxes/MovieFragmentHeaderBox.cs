@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using MatrixIO.IO.Bmff;
+﻿using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -11,10 +6,15 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Movie Fragment Header Box ("mfhd")
     /// </summary>
     [Box("mfhd", "Movie Fragment Header Box")]
-    public class MovieFragmentHeaderBox : FullBox
+    public sealed class MovieFragmentHeaderBox : FullBox
     {
-        public MovieFragmentHeaderBox() : base() { }
-        public MovieFragmentHeaderBox(Stream stream) : base(stream) { }
+        public MovieFragmentHeaderBox() 
+            : base() { }
+
+        public MovieFragmentHeaderBox(Stream stream) 
+            : base(stream) { }
+
+        public uint SequenceNumber { get; set; }
 
         internal override ulong CalculateSize()
         {
@@ -34,6 +34,5 @@ namespace MatrixIO.IO.Bmff.Boxes
 
             stream.WriteBEUInt32(SequenceNumber);
         }
-        public uint SequenceNumber { get; set; }
     }
 }

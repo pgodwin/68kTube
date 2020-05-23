@@ -1,8 +1,7 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -10,7 +9,7 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// File Delivery Item Information Box ("fiin")
     /// </summary>
     [Box("fiin", "File Delivery Item Information Box")]
-    public class FileDeliveryItemInformationBox : FullBox, ISuperBox
+    public sealed class FileDeliveryItemInformationBox : FullBox, ISuperBox
     {
         public FileDeliveryItemInformationBox() : base() { }
         public FileDeliveryItemInformationBox(Stream stream) : base(stream) { }
@@ -31,60 +30,33 @@ namespace MatrixIO.IO.Bmff.Boxes
         {
             base.SaveToStream(stream);
 
-            EntryCount = (ushort)(from c in Children
-                                  where c is PartitionEntryBox
-                                  select c).Count();
+            EntryCount = (ushort)Children.OfType<PartitionEntryBox>().Count();
 
             stream.WriteBEUInt16(EntryCount);
         }
 
-        private IList<Box> _Children = Portability.CreateList<Box>();
-        public IList<Box> Children
-        {
-            get { return _Children; }
-        }
+        public IList<Box> Children { get; } = new List<Box>();
 
-        public IEnumerator<Box> GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        public IEnumerator<Box> GetEnumerator() => Children.GetEnumerator();
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => Children.GetEnumerator();
 
         ushort EntryCount { get; set; }
-        
+
         public IEnumerable<PartitionEntryBox> PartitionEntries
         {
-            get
-            {
-                return from c in Children
-                       where c is PartitionEntryBox
-                       select (PartitionEntryBox)c;
-            }
+            get => Children.OfType<PartitionEntryBox>();
         }
 
         /*
         public FileDeliveySessionGroupBox SessionInfo
         {
-            get
-            {
-                return (from c in Children
-                        where c is FDSessionGroupBox
-                        select (FDSessionGroupBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<FDSessionGroupBox>().FirstOrDefault();
         }
 
         public GroupIdToNameBox GroupIdToName
         {
-            get
-            {
-                return (from c in Children
-                        where c is GroupIdToNameBox
-                        select (GroupIdToNameBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<GroupIdToNameBox>().FirstOrDefault();
         }
         */
     }

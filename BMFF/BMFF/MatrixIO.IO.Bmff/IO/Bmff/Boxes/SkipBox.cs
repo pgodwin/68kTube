@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -11,7 +7,7 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Alternative to the Free Space box.
     /// </summary>
     [Box("skip", "Skip Box")]
-    public class SkipBox : Box, IContentBox
+    public sealed class SkipBox : Box, IContentBox
     {
         public SkipBox() : base() { }
         public SkipBox(Stream stream) : base(stream) { }

@@ -1,7 +1,0 @@
-C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO.MpegTs\bin\Debug\MatrixIO.IO.MPEGTS.dll
-C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO.MpegTs\bin\Debug\MatrixIO.IO.MPEGTS.pdb
-C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO.MpegTs\bin\Debug\MatrixIO.IO.dll
-C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO.MpegTs\bin\Debug\MatrixIO.IO.pdb
-C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO.MpegTs\obj\Debug\MatrixIO.IO.MpegTs.csprojResolveAssemblyReference.cache
-C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO.MpegTs\obj\Debug\MatrixIO.IO.MPEGTS.dll
-C:\Users\pete\Downloads\basemedia-72293\BMFF\MatrixIO.IO.MpegTs\obj\Debug\MatrixIO.IO.MPEGTS.pdb

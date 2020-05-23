@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -10,100 +10,65 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Meta Box ("meta")
     /// </summary>
     [Box("meta", "Meta Box")]
-    public class MetaBox : FullBox, ISuperBox
+    public sealed class MetaBox : FullBox, ISuperBox
     {
-        public MetaBox() : base() {}
-        public MetaBox(byte version, uint flags=0) : base(version, flags) {}
-        public MetaBox(Stream stream) : base(stream) { }
+        public MetaBox()
+            : base() { }
 
-        private IList<Box> _Children = Portability.CreateList<Box>();
-        public IList<Box> Children
-        {
-            get { return _Children; }
-        }
+        public MetaBox(byte version, uint flags = 0)
+            : base(version, flags) { }
 
-        public IEnumerator<Box> GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        public MetaBox(Stream stream)
+            : base(stream) { }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        public IList<Box> Children { get; } = new List<Box>();
+
+        public IEnumerator<Box> GetEnumerator() => Children.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => Children.GetEnumerator();
 
         /* TODO: Support standard sub-boxes!
         public HandlerBox TheHandler
         {
-            get
-            {
-                return (from c in _Children
-                        where c is HandlerBox
-                        select (HandlerBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<HandlerBox>().FirstOrDefault();
         }
+
         public PrimaryItemBox PrimaryResource
         {
-            get
-            {
-                return (from c in _Children
-                        where c is PrimaryItemBox
-                        select (PrimaryItemBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<PrimaryItemBox>().FirstOrDefault();
         }
         */
-        public DataInformationBox FileLocations 
+
+        public DataInformationBox FileLocations
         {
-            get
-            {
-                return (from c in _Children
-                        where c is DataInformationBox
-                        select (DataInformationBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<DataInformationBox>().FirstOrDefault();
         }
+
         /*
         public ItemLocationBox ItemLocations
         {
-            get
-            {
-                return (from c in _Children
-                        where c is ItemLocationBox
-                        select (ItemLocationBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<ItemLocationBox>().FirstOrDefault();
         }
         */
+
         public ItemProtectionBox Protections
         {
-            get
-            {
-                return (from c in _Children
-                        where c is ItemProtectionBox
-                        select (ItemProtectionBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<ItemProtectionBox>().FirstOrDefault();
         }
+
         /*
         public ItemInfoBox ItemInfos
         {
-            get
-            {
-                return (from c in _Children
-                        where c is ItemInfonBox
-                        select (ItemInfoBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<ItemInfoBox>().FirstOrDefault();      
         }
 
         public IPMPControlBox IPMPControl
         {
-            get
-            {
-                return (from c in _Children
-                        where c is IPMPControlBox
-                        select (IPMPControlBox)c).FirstOrDefault();
-            }
+            get => Children.OfType<IPMPControlBox>().FirstOrDefault();
         }
         */
 
-        private Type[] StandardBoxes = 
+        private Type[] StandardBoxes =
         {
             //typeof(HandlerBox),
             //typeof(PrimaryItemBox),
@@ -114,15 +79,9 @@ namespace MatrixIO.IO.Bmff.Boxes
             //typeof(IPMPControlBox),
         };
 
-        public IEnumerable<Box> OtherBoxes
-        {
-            get
-            {
-
-                return from c in _Children
-                       where !StandardBoxes.Contains(c.GetType())
-                       select c;
-            }
-        }
+        public IEnumerable<Box> OtherBoxes =>
+            from c in Children
+            where !StandardBoxes.Contains(c.GetType())
+            select c;
     }
 }

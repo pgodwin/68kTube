@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -10,16 +7,22 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Data Entry Urn Box ("urn ")
     /// </summary>
     [Box("urn ", "Data Entry Urn Box")]
-    public class DataEntryUrnBox : FullBox
+    public sealed class DataEntryUrnBox : FullBox
     {
         public DataEntryUrnBox() : base() { }
-        public DataEntryUrnBox(Stream stream) : base(stream) { }
+
+        public DataEntryUrnBox(Stream stream) 
+            : base(stream) { }
+
+        public string Name { get; set; }
+
+        public string Location { get; set; }
 
         internal override ulong CalculateSize()
         {
-            return base.CalculateSize() + 
-                (String.IsNullOrEmpty(Name) ? 0 : (ulong)Encoding.UTF8.GetByteCount(Name)) + 1 + 
-                (String.IsNullOrEmpty(Location) ? 0 : (ulong)Encoding.UTF8.GetByteCount(Location));
+            return base.CalculateSize() +
+                (string.IsNullOrEmpty(Name) ? 0 : (ulong)Encoding.UTF8.GetByteCount(Name)) + 1 +
+                (string.IsNullOrEmpty(Location) ? 0 : (ulong)Encoding.UTF8.GetByteCount(Location));
         }
 
         protected override void LoadFromStream(Stream stream)
@@ -35,11 +38,11 @@ namespace MatrixIO.IO.Bmff.Boxes
             base.SaveToStream(stream);
 
             stream.WriteNullTerminatedUTF8String(Name);
-            if(Location.Length > 0)
-                stream.WriteUTF8String(Location);
-        }
 
-        public string Name { get; set; }
-        public string Location { get; set; }
+            if (Location.Length > 0)
+            {
+                stream.WriteUTF8String(Location);
+            }
+        }
     }
 }

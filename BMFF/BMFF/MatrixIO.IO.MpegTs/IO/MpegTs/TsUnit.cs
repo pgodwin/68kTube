@@ -1,35 +1,38 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace MatrixIO.IO.MpegTs
 {
     public class TsUnit
     {
-        private readonly IList<TsPacket> _packets;
-        public IList<TsPacket> Packets { get { return _packets; } }
-
+        private readonly List<TsPacket> _packets;
         private readonly TsUnitPayload _payload;
-        public IList<byte> Payload { get { return _payload; }}
 
         public TsUnit()
         {
-            _packets = Portability.CreateList<TsPacket>();
-            _payload = new TsUnitPayload(_packets);
-        }
-        public TsUnit(int capacity)
-        {
-            _packets = Portability.CreateList<TsPacket>(capacity);
-            _payload = new TsUnitPayload(_packets);
-        }
-        public TsUnit(IEnumerable<TsPacket> packets)
-        {
-            _packets = Portability.CreateList(packets);
+            _packets = new List<TsPacket>();
             _payload = new TsUnitPayload(_packets);
         }
 
-        private class TsUnitPayload : IList<byte>
+        public TsUnit(int capacity)
+        {
+            _packets = new List<TsPacket>(capacity);
+            _payload = new TsUnitPayload(_packets);
+        }
+
+        public TsUnit(IEnumerable<TsPacket> packets)
+        {
+            _packets = new List<TsPacket>(packets);
+            _payload = new TsUnitPayload(_packets);
+        }
+
+        public IList<TsPacket> Packets => _packets;
+
+        public IList<byte> Payload => _payload;
+
+        private sealed class TsUnitPayload : IList<byte>
         {
             private readonly IList<TsPacket> _packets;
 
@@ -38,20 +41,11 @@ namespace MatrixIO.IO.MpegTs
                 _packets = packets;
             }
 
-            public int IndexOf(byte item)
-            {
-                throw new NotSupportedException();
-            }
+            public int IndexOf(byte item) => throw new NotSupportedException();
 
-            public void Insert(int index, byte item)
-            {
-                throw new NotSupportedException();
-            }
+            public void Insert(int index, byte item) => throw new NotSupportedException();
 
-            public void RemoveAt(int index)
-            {
-                throw new NotSupportedException();
-            }
+            public void RemoveAt(int index) => throw new NotSupportedException();
 
             public byte this[int index]
             {
@@ -70,15 +64,9 @@ namespace MatrixIO.IO.MpegTs
                 }
             }
 
-            public void Add(byte item)
-            {
-                throw new NotSupportedException();
-            }
+            public void Add(byte item) => throw new NotSupportedException();
 
-            public void Clear()
-            {
-                throw new NotSupportedException();
-            }
+            public void Clear() => throw new NotSupportedException();
 
             public bool Contains(byte item)
             {
@@ -88,6 +76,7 @@ namespace MatrixIO.IO.MpegTs
             public void CopyTo(byte[] array, int arrayIndex)
             {
                 var offset = arrayIndex;
+
                 foreach (var packet in _packets)
                 {
                     if (packet.Payload != null)
@@ -98,33 +87,18 @@ namespace MatrixIO.IO.MpegTs
                 }
             }
 
-            public int Count
-            {
-                get
-                {
-                    return _packets.Sum(packet => packet.Payload != null ? packet.Payload.Length : 0);
-                }
-            }
+            public int Count => _packets.Sum(packet => packet.Payload != null ? packet.Payload.Length : 0);
 
-            public bool IsReadOnly
-            {
-                get { return true; }
-            }
+            public bool IsReadOnly => true;
 
-            public bool Remove(byte item)
-            {
-                throw new NotSupportedException();
-            }
+            public bool Remove(byte item) => throw new NotSupportedException();
 
             public IEnumerator<byte> GetEnumerator()
             {
                 return _packets.SelectMany(packet => packet.Payload).GetEnumerator();
             }
 
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }

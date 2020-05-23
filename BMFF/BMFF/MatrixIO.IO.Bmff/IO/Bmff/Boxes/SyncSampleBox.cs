@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
 {
@@ -10,14 +6,21 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Sync Sample Box ("stss")
     /// </summary>
     [Box("stss", "Sync Sample Box")]
-    public class SyncSampleBox : FullBox, ITableBox<SyncSampleBox.SyncSampleEntry>
+    public sealed class SyncSampleBox : FullBox, ITableBox<SyncSampleBox.SyncSampleEntry>
     {
-        public SyncSampleBox() : base() { }
-        public SyncSampleBox(Stream stream) : base(stream) { }
+        public SyncSampleBox()
+            : base() { }
+
+        public SyncSampleBox(Stream stream)
+            : base(stream) { }
+
+        public SyncSampleEntry[] Entries { get; set; }
+
+        public int EntryCount => Entries.Length;
 
         internal override ulong CalculateSize()
         {
-            return base.CalculateSize() + 4 + ((ulong)_Entries.Count * 4);
+            return base.CalculateSize() + 4 + ((ulong)Entries.Length * 4);
         }
 
         protected override void LoadFromStream(Stream stream)
@@ -26,9 +29,11 @@ namespace MatrixIO.IO.Bmff.Boxes
 
             uint entryCount = stream.ReadBEUInt32();
 
+            Entries = new SyncSampleEntry[entryCount];
+
             for (uint i = 0; i < entryCount; i++)
             {
-                _Entries.Add(new SyncSampleEntry(stream.ReadBEUInt32()));
+                Entries[i] = new SyncSampleEntry(stream.ReadBEUInt32());
             }
         }
 
@@ -36,39 +41,30 @@ namespace MatrixIO.IO.Bmff.Boxes
         {
             base.SaveToStream(stream);
 
-            stream.WriteBEUInt32((uint)_Entries.Count);
+            stream.WriteBEUInt32((uint)Entries.Length);
 
-            foreach (SyncSampleEntry SyncSampleEntry in _Entries)
+            for (int i = 0; i < Entries.Length; i++)
             {
-                stream.WriteBEUInt32(SyncSampleEntry.SampleNumber);
+                ref SyncSampleEntry entry = ref Entries[i];
+
+                stream.WriteBEUInt32(entry.SampleNumber);
             }
         }
 
-        private IList<SyncSampleEntry> _Entries = Portability.CreateList<SyncSampleEntry>();
-        public IList<SyncSampleEntry> Entries
+        public readonly struct SyncSampleEntry
         {
-            get
-            {
-                return _Entries;
-            }
-        }
-
-        public int EntryCount { get { return _Entries.Count; } }
-
-        public class SyncSampleEntry
-        {
-            public uint SampleNumber { get; set; }
-
-            public SyncSampleEntry() { }
             public SyncSampleEntry(uint sampleNumber)
             {
                 SampleNumber = sampleNumber;
             }
 
+            public uint SampleNumber { get; }
+
             public static implicit operator uint(SyncSampleEntry entry)
             {
                 return entry.SampleNumber;
             }
+
             public static implicit operator SyncSampleEntry(uint sampleDependency)
             {
                 return new SyncSampleEntry(sampleDependency);

@@ -1,0 +1,3 @@
+[submodule "BMFF/bmff"]
+	path = BMFF/bmff
+	url = https://github.com/heksesang/bmff.git

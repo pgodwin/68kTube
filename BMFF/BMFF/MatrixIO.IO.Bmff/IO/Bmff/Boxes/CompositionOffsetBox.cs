@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
@@ -10,14 +7,21 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Composition Offset Box ("ctts")
     /// </summary>
     [Box("ctts", "Composition Offset Box")]
-    public class CompositionOffsetBox : FullBox, ITableBox<CompositionOffsetBox.CompositionOffsetEntry>
+    public sealed class CompositionOffsetBox : FullBox, ITableBox<CompositionOffsetBox.CompositionOffsetEntry>
     {
-        public CompositionOffsetBox() : base() { }
-        public CompositionOffsetBox(Stream stream) : base(stream) { }
+        public CompositionOffsetBox()
+            : base() { }
+
+        public CompositionOffsetBox(Stream stream) 
+            : base(stream) { }
+
+        public CompositionOffsetEntry[] Entries { get; set; }
+
+        public int EntryCount => Entries.Length;
 
         internal override ulong CalculateSize()
         {
-            return base.CalculateSize() + 4 + ((ulong)_Entries.Count * (4 + 4));
+            return base.CalculateSize() + 4 + ((ulong)Entries.Length * (4 + 4));
         }
 
         protected override void LoadFromStream(Stream stream)
@@ -26,13 +30,14 @@ namespace MatrixIO.IO.Bmff.Boxes
 
             uint entryCount = stream.ReadBEUInt32();
 
+            Entries = new CompositionOffsetEntry[entryCount];
+
             for (uint i = 0; i < entryCount; i++)
             {
-                _Entries.Add(new CompositionOffsetEntry()
-                {
-                    SampleCount = stream.ReadBEUInt32(),
-                    SampleOffset = stream.ReadBEUInt32(),
-                });
+                Entries[i] = new CompositionOffsetEntry(
+                    sampleCount: stream.ReadBEUInt32(),
+                    sampleOffset: stream.ReadBEUInt32()
+                );
             }
         }
 
@@ -40,37 +45,28 @@ namespace MatrixIO.IO.Bmff.Boxes
         {
             base.SaveToStream(stream);
 
-            stream.WriteBEUInt32((uint)_Entries.Count);
+            stream.WriteBEUInt32((uint)Entries.Length);
 
-            foreach (CompositionOffsetEntry CompositionOffsetEntry in _Entries)
+            for (int i = 0; i < Entries.Length; i++)
             {
-                stream.WriteBEUInt32(CompositionOffsetEntry.SampleCount);
-                stream.WriteBEUInt32(CompositionOffsetEntry.SampleOffset);
+                ref CompositionOffsetEntry entry = ref Entries[i];
+
+                stream.WriteBEUInt32(entry.SampleCount);
+                stream.WriteBEUInt32(entry.SampleOffset);
             }
         }
 
-        private IList<CompositionOffsetEntry> _Entries = Portability.CreateList<CompositionOffsetEntry>();
-        public IList<CompositionOffsetEntry> Entries
+        public readonly struct CompositionOffsetEntry
         {
-            get
-            {
-                return _Entries;
-            }
-        }
-
-        public int EntryCount { get { return _Entries.Count; } }
-
-        public class CompositionOffsetEntry
-        {
-            public uint SampleCount { get; set; }
-            public uint SampleOffset { get; set; }
-
-            public CompositionOffsetEntry() { }
-            public CompositionOffsetEntry(uint sampleCount, uint sampleDelta)
+            public CompositionOffsetEntry(uint sampleCount, uint sampleOffset)
             {
                 SampleCount = sampleCount;
-                SampleOffset = sampleDelta;
+                SampleOffset = sampleOffset;
             }
+
+            public uint SampleCount { get; }
+
+            public uint SampleOffset { get; }
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace MatrixIO.IO.Bmff.Boxes
@@ -10,25 +8,18 @@ namespace MatrixIO.IO.Bmff.Boxes
     /// Data Information Box ("dinf")
     /// </summary>
     [Box("dinf", "Data Information Box")]
-    public class DataInformationBox : Box, ISuperBox
+    public sealed class DataInformationBox : Box, ISuperBox
     {
-        public DataInformationBox() : base() { }
-        public DataInformationBox(Stream stream) : base(stream) { }
+        public DataInformationBox() 
+            : base() { }
 
-        private IList<Box> _Children = Portability.CreateList<Box>();
-        public IList<Box> Children
-        {
-            get { return _Children; }
-        }
+        public DataInformationBox(Stream stream) 
+            : base(stream) { }
 
-        public IEnumerator<Box> GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        public IList<Box> Children { get; } = new List<Box>();
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return Children.GetEnumerator();
-        }
+        public IEnumerator<Box> GetEnumerator() => Children.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => Children.GetEnumerator();
     }
 }
