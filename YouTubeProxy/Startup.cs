@@ -39,6 +39,7 @@ namespace YouTubeProxy
             }
             app.UseStaticFiles();
 
+
             app.UseRouting();
 
             //app.UseMvc();
