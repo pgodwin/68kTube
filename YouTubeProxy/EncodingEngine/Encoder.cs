@@ -42,8 +42,6 @@ namespace YouTubeProxy.EncodingEngine
 
             var profile = _profile[encoder];
 
-            encodeDetails.Profile = profile;
-
             var outputFile = Path.Combine(Path.Combine(Settings.EncodeLocation), encodeDetails.DestinationFileName);
 
 

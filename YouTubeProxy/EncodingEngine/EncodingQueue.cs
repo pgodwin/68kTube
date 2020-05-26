@@ -12,6 +12,8 @@ namespace YouTubeProxy.EncodingEngine
 
         private static EncodingQueue _currentQueue;
 
+        private static Profiles profiles = Profiles.LoadProfiles();
+
         public static EncodingQueue GetQueue()
         {
             if (_currentQueue == null)
@@ -21,7 +23,7 @@ namespace YouTubeProxy.EncodingEngine
         }
 
 
-        private Encoder encoder = new Encoder(Profiles.LoadProfiles());
+        private Encoder encoder = new Encoder(profiles);
 
         public const int MaxJobs = 4;
 
@@ -29,6 +31,11 @@ namespace YouTubeProxy.EncodingEngine
         
         public void AddToQueue(EncodeDetail details)
         {
+            if (!profiles.ContainsKey(details.EncodeProfileName))
+                throw new Exception("Invalid profile");
+
+            details.Profile = profiles[details.EncodeProfileName];
+
             EncodeStore.GetStore().AddOrUpdateVideo(details);
             this.Enqueue(details);
             this.RunNextJob();
