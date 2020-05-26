@@ -143,7 +143,7 @@
   "rv10": {
     "Name": "rv10",
     "Exe": "ffmpeg",
-    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(320/(iw*sar)\\,200/ih):ih*min(320/(iw*sar)\\,200/ih), pad=320:200:(320-iw*min(320/iw\\,200/ih))/2:(200-ih*min(320/iw\\,200/ih))/2\" -vcodec rv10 -r 15 -acodec real_144 \"{1}.rm\"",
+    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(320/(iw*sar)\\,240/ih):ih*min(320/(iw*sar)\\,240/ih), pad=320:240:(320-iw*min(320/iw\\,240/ih))/2:(200-ih*min(320/iw\\,240/ih))/2\" -vcodec rv10 -r 15 -acodec real_144 \"{1}.rm\"",
     "OutputExtension": "mp4",
     "FriendlyName": "RealVideo (FFMPEG)",
     "Description": "Real Video compatible file (Recommended for Windows 3.1 up)",

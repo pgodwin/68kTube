@@ -57,6 +57,8 @@ namespace YouTubeProxy.EncodingEngine
 
             Console.WriteLine("Running: {0} {1}", startInfo.FileName, arguments);
 
+
+
             startInfo.Arguments = arguments;
             startInfo.CreateNoWindow = true;
             startInfo.RedirectStandardOutput = true;

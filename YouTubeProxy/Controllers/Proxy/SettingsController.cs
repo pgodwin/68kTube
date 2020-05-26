@@ -23,7 +23,7 @@ namespace YouTubeProxy.Controllers.Proxy
             if (Request.Method == "POST")
             {
                 currentProfile = Request.Form["profile"];
-                Response.Cookies.Append("encoder", currentProfile, new CookieOptions() { Expires = DateTimeOffset.MaxValue });
+                Response.Cookies.Append("encoder", currentProfile, new CookieOptions() { Expires = DateTime.Now.AddYears(1) });
 
                 var returnUrl = Request.Query["returnUrl"].FirstOrDefault() ?? Request.Form["returnUrl"].FirstOrDefault();
 
