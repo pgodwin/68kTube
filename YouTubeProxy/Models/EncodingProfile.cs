@@ -25,7 +25,7 @@ namespace YouTubeProxy.Models
 
         public string ScaleMode { get; set; } = "tofit";
 
-        public string MimeType { get; set; } = "vide/quicktime";
+        public string MimeType { get; set; } = "video/quicktime";
 
     }
 }
