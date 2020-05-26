@@ -54,9 +54,11 @@ namespace YouTubeProxy.Controllers.MacApi
             if (details == null)
                 return NotFound();
 
-            var path = details.DestinationFileName;
+            //var path = Path.Combine(Settings.EncodeLocation, details.DestinationFileName + details.Profile.OutputExtension);
 
-            //var path = Directory.EnumerateFiles(Settings.EncodeLocation, id + ".*").FirstOrDefault(); ;
+            
+
+            var path = Directory.EnumerateFiles(Settings.EncodeLocation, id + ".*").FirstOrDefault(); ;
 
             if (path == null)
                 return NotFound();
