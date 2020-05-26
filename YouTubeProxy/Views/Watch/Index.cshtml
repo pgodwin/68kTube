@@ -13,7 +13,7 @@
         <embed src="@Model.PlayUrl"
                MAINTAINASPECT=true
                NOJAVA=true
-               TYPE="video/vnd.rn-realvideo"
+               TYPE="@Model.EncodeDetails.Profile?.MimeType"
                HEIGHT=304 WIDTH=352>
         </embed>
     }

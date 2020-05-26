@@ -150,6 +150,6 @@
     "Height": 240,
     "Width": 320,
     "ScaleMode": "tofit",
-    "MimeType": "video/vnd.rn-realvideo"
+    "MimeType": "audio/x-pn-realaudio-plugin"
   }
 }
