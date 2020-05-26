@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using YouTubeProxy.EncodingEngine;
 using YouTubeProxy.Helpers;
 
 namespace YouTubeProxy.Controllers.MacApi
@@ -43,14 +44,26 @@ namespace YouTubeProxy.Controllers.MacApi
         public IActionResult GetMov(string id)
         {
             Console.WriteLine("Movie requested {0}", id);
-       
-           
-            var path = Directory.EnumerateFiles(Settings.EncodeLocation, id + ".*").FirstOrDefault(); ;
+
+            var idGuid = Guid.Parse(id);
+
+            // Check the encode store
+            // This is gonna be slow if we have many encodes...
+            var details = EncodeStore.GetStore().GetByFileId(idGuid);
+            
+            if (details == null)
+                return NotFound();
+
+            var path = details.DestinationFileName;
+
+            //var path = Directory.EnumerateFiles(Settings.EncodeLocation, id + ".*").FirstOrDefault(); ;
 
             if (path == null)
                 return NotFound();
             var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            return File(stream, "video/quicktime");
+
+            
+            return File(stream, details.Profile.MimeType);
 
             
         }

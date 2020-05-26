@@ -46,5 +46,10 @@ namespace YouTubeProxy.EncodingEngine
 
             return null;
         }
+
+        public EncodeDetail GetByFileId(Guid id)
+        {
+            return this.Values.FirstOrDefault(c => c.FileId == id);
+        }
     }
 }

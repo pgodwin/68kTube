@@ -32,6 +32,8 @@ namespace YouTubeProxy.EncodingEngine
             var videoId = encodeDetails.VideoId;
             var encoder = encodeDetails.EncodeProfileName;
 
+
+
             if (!_profile.ContainsKey(encoder))
             {
                 this.FailJob(encodeDetails, "Invalid Encoding Profile");
@@ -39,8 +41,9 @@ namespace YouTubeProxy.EncodingEngine
             }
 
             var profile = _profile[encoder];
-            
-            
+
+            encodeDetails.Profile = profile;
+
             var outputFile = Path.Combine(Path.Combine(Settings.EncodeLocation), encodeDetails.DestinationFileName);
 
 

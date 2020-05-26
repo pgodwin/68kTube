@@ -27,14 +27,14 @@
     "FriendlyName": "Animation (256Color 2FPS) (Quicktime)",
     "Description": "Recommended only for low-end Macintosh II machines. Poor Quality."
   },
-   "audio": {
+  "audio": {
     "Name": "audio",
     "Exe": "QTConverter.exe",
     "Arguments": "QuickTimeProfiles\\audio.xml {0} {1}.mov",
     "OutputExtension": "mov",
 
     "FriendlyName": "Audio Only (IMA 4:1 44k Stereo) (Quicktime)",
-    "Description": "Audio only." 
+    "Description": "Audio only."
   },
   "cinepak": {
     "Name": "cinepak",
@@ -71,7 +71,7 @@
   },
   "h263FFMPEG": {
     "Name": "h263FFMPEG",
-    "Exe": "ffmpeg.exe",
+    "Exe": "ffmpeg",
     // adpcm_ima_qt crashes quicktime on 68k macs!
     //"Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(352/(iw*sar)\\,288/ih):ih*min(352/(iw*sar)\\,288/ih), pad=352:288:(352-iw*min(352/iw\\,288/ih))/2:(288-ih*min(352/iw\\,288/ih))/2\"  -vcodec h263 -b:v 150k -r 15 -acodec pcm_u8 -ar 22050 -ac 1 -movflags +faststart \"{1}.mov\"",
     "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(352/(iw*sar)\\,288/ih):ih*min(352/(iw*sar)\\,288/ih), pad=352:288:(352-iw*min(352/iw\\,288/ih))/2:(288-ih*min(352/iw\\,288/ih))/2\"  -vcodec h263 -b:v 150k -r 15 -acodec pcm_alaw -ar 22050 -ac 1 -movflags +faststart \"{1}.mov\"",
@@ -84,7 +84,7 @@
   },
   "h263FFMPEG-QCIF": {
     "Name": "h263FFMPEG-QCIF", //176 × 144
-    "Exe": "ffmpeg.exe",
+    "Exe": "ffmpeg",
     // adpcm_ima_qt crashes quicktime on 68k macs!
     "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(176/(iw*sar)\\,144/ih):ih*min(176/(iw*sar)\\,144/ih), pad=176:144:(176-iw*min(176/iw\\,144/ih))/2:(144-ih*min(176/iw\\,144/ih))/2\"  -vcodec h263 -b:v 150k -r 15 -acodec pcm_alaw -ar 22050 -ac 1 -movflags +faststart \"{1}.mov\"",
     "OutputExtension": "mov",
@@ -95,10 +95,10 @@
     "Scale": 2.0,
     "ScaleMode": "tofit"
   },
-  
+
   "sorrensonFFMPEG": {
     "Name": "sorrensonFFMPEG",
-    "Exe": "ffmpeg.exe",
+    "Exe": "ffmpeg",
     "Arguments": "-y -i \"{0}\" -vf scale=320:-1 -vcodec svq1 -b:v 500k -acodec pcm_alaw -ar 22050 -ac 2 -movflags +faststart \"{1}.mov\"",
     "OutputExtension": "mov",
     "FriendlyName": "Sorreson Video (FFMPEG)",
@@ -120,7 +120,7 @@
   },
   "mpeg1": {
     "Name": "mpeg1",
-    "Exe": "ffmpeg.exe",
+    "Exe": "ffmpeg",
     "Arguments": "-y -i \"{0}\" -vf scale=-1:360 -vcodec mpeg1video -b:v 500k -acodec mp2 -b:a 96k  \"{1}.mpeg\"",
     "OutputExtension": "mpeg",
     "FriendlyName": "MPEG1 (PPC Only) (FFMPEG)",
@@ -131,7 +131,7 @@
   },
   "mpeg4": {
     "Name": "mpeg4",
-    "Exe": "ffmpeg.exe",
+    "Exe": "ffmpeg",
     "Arguments": "-y -i \"{0}\" -vf scale=-1:360 -vcodec mpeg4 -b:v 500k -acodec aac -b:a 96k -movflags +faststart \"{1}.mp4\"",
     "OutputExtension": "mp4",
     "FriendlyName": "MPEG4 (PPC Only) (FFMPEG)",
@@ -139,5 +139,17 @@
     "Height": 240,
     "Width": 320,
     "ScaleMode": "tofit"
+  },
+  "rv10": {
+    "Name": "rv10",
+    "Exe": "ffmpeg",
+    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(320/(iw*sar)\\,200/ih):ih*min(320/(iw*sar)\\,200/ih), pad=320:200:(320-iw*min(320/iw\\,200/ih))/2:(200-ih*min(320/iw\\,200/ih))/2\" -vcodec rv10 -r 15 -acodec real_144 \"{1}.rm\"",
+    "OutputExtension": "mp4",
+    "FriendlyName": "RealVideo (FFMPEG)",
+    "Description": "Real Video compatible file (Recommended for Windows 3.1 up)",
+    "Height": 240,
+    "Width": 320,
+    "ScaleMode": "tofit",
+    "MimeType": "video/vnd.rn-realvideo"
   }
 }

@@ -8,12 +8,24 @@
 <h2>@Model.Title</h2>
 @if (Model.EncodeDetails.Progress.Status == YouTubeProxy.EncodingEngine.StatusCodes.ReadyForDownload)
 {
-    <embed src="@Model.PlayUrl" 
-           HEIGHT="304" WIDTH="352"
-           TYPE="video/quicktime"
-           SCALE="aspect"
-           PLUGINSPAGE="http://www.apple.com/quicktime/download/">
-    </embed>
+    if (Model.EncodeDetails.Profile?.MimeType != "video/quicktime")
+    {
+        <embed src="@Model.PlayUrl"
+               MAINTAINASPECT=true
+               NOJAVA=true
+               HEIGHT=304 WIDTH=352>
+        </embed>
+    }
+    else
+    {
+        <embed src="@Model.PlayUrl"
+               HEIGHT=304 WIDTH=352
+               TYPE="video/quicktime"
+               SCALE="aspect"
+               NOJAVA=true
+               PLUGINSPAGE="http://www.apple.com/quicktime/download/">
+        </embed>
+    }
     <br />
     <a href="@Model.DownloadUrl">Download Video</a>
 }
