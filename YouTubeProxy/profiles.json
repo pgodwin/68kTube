@@ -5,70 +5,70 @@
    * Parameter {0} is input, {1} is output
   */
 {
-  "video1": {
-    "Name": "video1",
-    "Exe": "QTConverter.exe",
-    "Arguments": "QuickTimeProfiles\\video1.xml {0} {1}.mov",
-    "OutputExtension": "mov",
-    "Height": 240,
-    "Width": 320,
-    "ScaleMode": "tofit",
-    "FriendlyName": "Apple Video (Quicktime)",
-    "Description": "Recommended only for low-end Macintosh II machines. Poor Quality."
-  },
-  "animation": {
-    "Name": "animation",
-    "Exe": "QTConverter.exe",
-    "Arguments": "QuickTimeProfiles\\animation.xml {0} {1}.mov",
-    "OutputExtension": "mov",
-    "Height": 240,
-    "Width": 320,
-    "ScaleMode": "tofit",
-    "FriendlyName": "Animation (256Color 2FPS) (Quicktime)",
-    "Description": "Recommended only for low-end Macintosh II machines. Poor Quality."
-  },
-  "audio": {
-    "Name": "audio",
-    "Exe": "QTConverter.exe",
-    "Arguments": "QuickTimeProfiles\\audio.xml {0} {1}.mov",
-    "OutputExtension": "mov",
+  //"video1": {
+  //  "Name": "video1",
+  //  "Exe": "QTConverter.exe",
+  //  "Arguments": "QuickTimeProfiles\\video1.xml {0} {1}.mov",
+  //  "OutputExtension": "mov",
+  //  "Height": 240,
+  //  "Width": 320,
+  //  "ScaleMode": "tofit",
+  //  "FriendlyName": "Apple Video (Quicktime)",
+  //  "Description": "Recommended only for low-end Macintosh II machines. Poor Quality."
+  //},
+  //"animation": {
+  //  "Name": "animation",
+  //  "Exe": "QTConverter.exe",
+  //  "Arguments": "QuickTimeProfiles\\animation.xml {0} {1}.mov",
+  //  "OutputExtension": "mov",
+  //  "Height": 240,
+  //  "Width": 320,
+  //  "ScaleMode": "tofit",
+  //  "FriendlyName": "Animation (256Color 2FPS) (Quicktime)",
+  //  "Description": "Recommended only for low-end Macintosh II machines. Poor Quality."
+  //},
+  //"audio": {
+  //  "Name": "audio",
+  //  "Exe": "QTConverter.exe",
+  //  "Arguments": "QuickTimeProfiles\\audio.xml {0} {1}.mov",
+  //  "OutputExtension": "mov",
 
-    "FriendlyName": "Audio Only (IMA 4:1 44k Stereo) (Quicktime)",
-    "Description": "Audio only."
-  },
-  "cinepak": {
-    "Name": "cinepak",
-    "Exe": "QTConverter.exe",
-    "Arguments": "QuickTimeProfiles\\cinepak.xml {0} {1}.mov",
-    "OutputExtension": "mov",
-    "FriendlyName": "Cinepak (Quicktime)",
-    "Description": "Recommended only for low-mid range 68k Macintosh machines. Relatively poor quality.",
-    "Height": 240,
-    "Width": 320,
-    "ScaleMode": "tofit"
-  },
-  "h261": {
-    "Name": "h261",
-    "Exe": "QTConverter.exe",
-    "Arguments": "QuickTimeProfiles\\h261.xml {0} {1}.mov",
-    "OutputExtension": "mov",
-    "FriendlyName": "H.261 (Quicktime)",
-    "Description": "Recommended only for mid-range 68k Macintosh machines. Relatively poor quality.",
-    "Height": 288,
-    "Width": 352,
-    "ScaleMode": "tofit"
-  },
-  "h263": {
-    "Name": "h263",
-    "Exe": "QTConverter.exe",
-    "Arguments": "QuickTimeProfiles\\h263.xml {0} {1}.mov",
-    "OutputExtension": "mov",
-    "FriendlyName": "H.263 (Quicktime)",
-    "Description": "Recommended only for low-mid range 68k Macintosh machines. Relatively poor quality.",
-    "Height": 288,
-    "Width": 352,
-    "ScaleMode": "tofit"
-  },
+  //  "FriendlyName": "Audio Only (IMA 4:1 44k Stereo) (Quicktime)",
+  //  "Description": "Audio only."
+  //},
+  //"cinepak": {
+  //  "Name": "cinepak",
+  //  "Exe": "QTConverter.exe",
+  //  "Arguments": "QuickTimeProfiles\\cinepak.xml {0} {1}.mov",
+  //  "OutputExtension": "mov",
+  //  "FriendlyName": "Cinepak (Quicktime)",
+  //  "Description": "Recommended only for low-mid range 68k Macintosh machines. Relatively poor quality.",
+  //  "Height": 240,
+  //  "Width": 320,
+  //  "ScaleMode": "tofit"
+  //},
+  //"h261": {
+  //  "Name": "h261",
+  //  "Exe": "QTConverter.exe",
+  //  "Arguments": "QuickTimeProfiles\\h261.xml {0} {1}.mov",
+  //  "OutputExtension": "mov",
+  //  "FriendlyName": "H.261 (Quicktime)",
+  //  "Description": "Recommended only for mid-range 68k Macintosh machines. Relatively poor quality.",
+  //  "Height": 288,
+  //  "Width": 352,
+  //  "ScaleMode": "tofit"
+  //},
+  //"h263": {
+  //  "Name": "h263",
+  //  "Exe": "QTConverter.exe",
+  //  "Arguments": "QuickTimeProfiles\\h263.xml {0} {1}.mov",
+  //  "OutputExtension": "mov",
+  //  "FriendlyName": "H.263 (Quicktime)",
+  //  "Description": "Recommended only for low-mid range 68k Macintosh machines. Relatively poor quality.",
+  //  "Height": 288,
+  //  "Width": 352,
+  //  "ScaleMode": "tofit"
+  //},
   "h263FFMPEG": {
     "Name": "h263FFMPEG",
     "Exe": "ffmpeg",
@@ -80,7 +80,8 @@
     "Description": "Compatible with QuickTime 3 and onwards. Reasonably good quality and can be decompressed on a PPC Machine",
     "Height": 288,
     "Width": 352,
-    "ScaleMode": "tofit"
+    "ScaleMode": "tofit",
+    "MimeType": "video/quicktime"
   },
   "h263FFMPEG-QCIF": {
     "Name": "h263FFMPEG-QCIF", //176 × 144
@@ -93,31 +94,32 @@
     "Width": 176,
     "Height": 144,
     "Scale": 2.0,
-    "ScaleMode": "tofit"
+    "ScaleMode": "tofit",
+    "MimeType": "video/quicktime"
   },
-
   "sorrensonFFMPEG": {
     "Name": "sorrensonFFMPEG",
     "Exe": "ffmpeg",
-    "Arguments": "-y -i \"{0}\" -vf scale=320:-1 -vcodec svq1 -b:v 500k -acodec pcm_alaw -ar 22050 -ac 2 -movflags +faststart \"{1}.mov\"",
+    "Arguments": "-y -i \"{0}\" -vf scale=320:-1 -vcodec svq1 -b:v 500k -acodec pcm_alaw -ar 22050 -ac 2 -movflags +faststart \"{1}.mov\"", // todo - qdesign?
     "OutputExtension": "mov",
     "FriendlyName": "Sorreson Video (FFMPEG)",
     "Description": "Sorrenson is supported on 68k and PPC machines in QuickTime3 or later. Requires a fast CPU to decode.",
     "Height": 240,
     "Width": 320,
-    "ScaleMode": "tofit"
+    "ScaleMode": "tofit",
+    "MimeType": "video/quicktime"
   },
-  "sorrenson": {
-    "Name": "sorrenson",
-    "Exe": "qtconverter.exe",
-    "Arguments": "QuickTimeProfiles\\sorenson.xml {0} {1}.mov",
-    "OutputExtension": "mov",
-    "FriendlyName": "Sorreson Video (QuickTime)",
-    "Description": "Sorrenson is supported on 68k and PPC machines in QuickTime3 or later. Requires a fast CPU to decode.",
-    "Height": 240,
-    "Width": 320,
-    "ScaleMode": "tofit"
-  },
+  //"sorrenson": {
+  //  "Name": "sorrenson",
+  //  "Exe": "qtconverter.exe",
+  //  "Arguments": "QuickTimeProfiles\\sorenson.xml {0} {1}.mov",
+  //  "OutputExtension": "mov",
+  //  "FriendlyName": "Sorreson Video (QuickTime)",
+  //  "Description": "Sorrenson is supported on 68k and PPC machines in QuickTime3 or later. Requires a fast CPU to decode.",
+  //  "Height": 240,
+  //  "Width": 320,
+  //  "ScaleMode": "tofit"
+  //},
   "mpeg1": {
     "Name": "mpeg1",
     "Exe": "ffmpeg",
@@ -127,7 +129,8 @@
     "Description": "MPEG1. Good quality audio and video, but requires a fast PPC procesor.",
     "Height": 240,
     "Width": 320,
-    "ScaleMode": "tofit"
+    "ScaleMode": "tofit",
+    "MimeType": "video/mpeg"
   },
   "mpeg4": {
     "Name": "mpeg4",
@@ -138,18 +141,55 @@
     "Description": "MPEG4. Good quality audio and video, but requires a fast PPC (G3+) procesor.",
     "Height": 240,
     "Width": 320,
-    "ScaleMode": "tofit"
+    "ScaleMode": "tofit",
+    "MimeType": "video/H264"
   },
   "rv10": {
     "Name": "rv10",
     "Exe": "ffmpeg",
-    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(320/(iw*sar)\\,240/ih):ih*min(320/(iw*sar)\\,240/ih), pad=320:240:(320-iw*min(320/iw\\,240/ih))/2:(200-ih*min(320/iw\\,240/ih))/2\" -vcodec rv10 -r 15 -acodec real_144 \"{1}.rm\"",
+    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(320/(iw*sar)\\,240/ih):ih*min(320/(iw*sar)\\,240/ih), pad=320:240:(320-iw*min(320/iw\\,240/ih))/2:(240-ih*min(320/iw\\,240/ih))/2\" -vcodec rv10 -r 15 -acodec real_144 \"{1}.rm\"",
     "OutputExtension": "mp4",
     "FriendlyName": "RealVideo (FFMPEG)",
     "Description": "Real Video compatible file (Recommended for Windows 3.1 up)",
-    "Height": 240,
+    "Height": 200,
     "Width": 320,
     "ScaleMode": "tofit",
     "MimeType": "audio/x-pn-realaudio-plugin"
+  },
+  "cinepakFFMPEG": {
+    "Name": "cinepakFFMPEG",
+    "Exe": "ffmpeg",
+    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(160/(iw*sar)\\,120/ih):ih*min(160/(iw*sar)\\,120/ih), pad=160:120:(160-iw*min(160/iw\\,120/ih))/2:(120-ih*min(160/iw\\,120/ih))/2\" -vcodec cinepak -r 10 -acodec pcm_alaw -ar 8000 -ac 1 \"{1}.mov\"",
+    "OutputExtension": "mp4",
+    "FriendlyName": "Cinepak (FFMPEG)",
+    "Description": "Cinepak Quicktime File",
+    "Height": 120,
+    "Width": 160,
+    "ScaleMode": "tofit",
+    "MimeType": "video/quicktime"
+  },
+  "mscram": {
+    "Name": "mscram",
+    "Exe": "ffmpeg",
+    "Arguments": "-y -i \"{0}\" -vf \"scale=(iw*sar)*min(160/(iw*sar)\\,120/ih):ih*min(160/(iw*sar)\\,120/ih), pad=160:120:(160-iw*min(160/iw\\,120/ih))/2:(120-ih*min(160/iw\\,120/ih))/2\" -vcodec msvideo1 -r 10 -acodec pcm_alaw -ar 8000 -ac 1 \"{1}.avi\"",
+    "OutputExtension": "mp4",
+    "FriendlyName": "MS Video 1 AVI (FFMPEG)",
+    "Description": "MS Video 1 AVI File",
+    "Height": 120,
+    "Width": 160,
+    "ScaleMode": "tofit",
+    "MimeType": "video/avi"
+  },
+  "au": {
+    "Name": "au",
+    "Exe": "ffmpeg",
+    "Arguments": "-y -i \"{0}\" -acodec pcm_ulaw -ar 8000 -ac 1 \"{1}.au\"",
+    "OutputExtension": "mp4",
+    "FriendlyName": "Sun Audio File (Audio only)",
+    "Description": "",
+    "Height": 120,
+    "Width": 160,
+    "ScaleMode": "tofit",
+    "MimeType": "audio/basic"
   }
 }
