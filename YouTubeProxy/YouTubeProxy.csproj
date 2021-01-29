@@ -49,7 +49,7 @@
     <PackageReference Include="Google.Apis.Auth" Version="1.45.0" />
     <PackageReference Include="Google.Apis.Core" Version="1.45.0" />
     <PackageReference Include="Google.Apis.YouTube.v3" Version="1.45.0.1929" />
-    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="log4net" Version="2.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
